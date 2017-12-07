@@ -1,0 +1,132 @@
+@charset "utf-8";
+
+/* =================================================================================
+* INFORMATION
+* -----------------------------------------------------------------------
+* @File Name: snb.css
+* @Version: 1.0
+* @Create Date: 2017-04-04
+* @Update Date: N/A
+* @History: N/A
+* ================================================================================= */
+.form .dataSet {width: 1214px; margin:0 auto;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.form .dataSet h2 {padding:40px 0;font-size:26px;font-weight:normal;text-align: center;font-size: 34px;}
+.form .dataSet h2:before {content: "";display: block;margin:0 auto; width: 28px;height: 40px;background: url('../images/common/bg_icon.png') no-repeat -40px -195px;}
+.form .dataSet h2.icon1:before {width: 36px;background-position: -73px -195px;}
+.form .dataSet h2.icon2:before {width: 36px;background-position: 0px -195px;}
+.form .dataSet h2 em {display: block;font-size:18px;font-weight:normal;font-size: 18px;color:#969696;}
+.form .loginForm input[type="password"] {margin-bottom: 0px;}
+/* 2017-06-01 회원가입 선택페이지 */
+.form .choiceArea {width:1212px;margin:0 auto;}
+.form .choiceLayout {float:right;display:inline-block;padding:80px 0 120px 0;}
+.form .choiceLayout:first-child {float:left;padding-right:7px;}
+.form .choiceLayout .choiceForm {width:598px;border:1px solid #e5e5e5;background:#f8f8f8;}
+.form .choiceLayout .choiceForm h3 {padding:23px 0;font-weight:bold;text-align:center;font-size:32px;}
+.form .choiceLayout .choiceForm h3 em {display:block;font-size:16px;color:#969696;}
+.form .choiceLayout .choiceForm .choice_personal h3:before {content: "";display: block;margin:0 auto; width:120px;height:120px;margin:75px auto 20px auto;background: url('../images/common/choice_personal.png') no-repeat}
+.form .choiceLayout .choiceForm .choice_dealer h3:before {content: "";display: block;margin:0 auto; width:120px;height:120px;margin:75px auto 20px auto;background: url('../images/common/choice_dealer.png') no-repeat}
+.form .choiceLayout .btnSet {padding:60px 30px 40px 25px}
+.form .choiceLayout .btnSet span a {padding:19px 0 19px;font-size:27px;font-weight:normal;}
+/* 2017-06-01 */
+.formArea .certifyArea {padding:18px 18px;margin:0 0 15px;font-size:18px;text-align:center;border:1px solid #d8d8d8;background:#fff;}
+.formArea .certifyArea .btnSet {margin:15px 0 0;}
+.formArea .certifyArea p {padding:47px 0 6px;font-weight:bold;background: url('../images/sub/img_certify_ok.png') no-repeat top center;background-size:31px 31px;}
+/**/
+.loginLayout {width: 100%;padding-top: 160px;}
+.loginLayout .titleBnk {width:544px;height:100px;margin:0 auto 80px; background: url('../images/sub/img_logo.png') no-repeat;}
+.loginLayout .loginForm {width: 612px;margin:0 auto;padding-bottom: 160px;}
+.loginLayout .loginForm input[type="text"],
+.loginLayout .loginForm input[type="password"],
+.loginLayout .loginForm input[type="number"] {margin-bottom: 20px;height: 60px;font-size: 18px;color: #969696;}
+.loginLayout .loginForm .loginBtn span a {font-size: 30px;margin:20px 0 40px;font-weight: normal;height: 80px;line-height: 80px;padding:0px;}
+.loginLayout .loginForm .keepsave {text-align: center;margin-bottom: 60px;font-size: 22px;}
+.loginLayout .loginForm .keepsave span {display: inline-block;margin:0 10px;}
+.loginLayout .loginForm .btnLogin span {width: 50%;padding:0 10px;}
+.loginLayout .loginForm .btnLogin span:first-child {padding-left:0;}
+.loginLayout .loginForm .btnLogin span:last-child {padding-right:0;}
+.loginLayout .loginForm .btnLogin span a {font-size: 20px;color: #e24e4e;height: 60px;line-height:60px;padding:0px;}
+.loginLayout .loginForm .innerbox {}
+.loginLayout .loginForm .innerbox ul {border:1px solid #e6e6e6;border-bottom: none;background-color: #fff;}
+.loginLayout .loginForm .innerbox ul li {border-bottom: 1px solid #e6e6e6;height: 60px;line-height: 60px;padding:0 10px;}
+
+.joinForm {width: 612px;margin:0 auto;padding-bottom: 160px;}
+.formArea .writeRow {font-size: 18px;}
+.formArea .writeRow input[type="text"],
+.formArea .writeRow input[type="password"],
+.formArea .writeRow input[type="number"] {border-bottom: none;height: 60px;padding: 6px 20px;}
+.formArea .writeRow.lastRow {border-bottom: 1px solid #d8d8d8;margin-bottom: 10px;}
+.formArea .writeRow input[type="text"]:-moz-read-only {color:#969696;}
+.formArea .writeRow input[type="text"]:read-only {color:#969696;}
+.formArea .writeRow.gender {display:block;padding:10px;width:100%;border:1px solid #d8d8d8;box-sizing:border-box;border-bottom:none;background-color: #fff;}
+.formArea .writeRow.gender span {position:relative;float:left;display:inline-block;padding:0 10px;width:50%;box-sizing:border-box;}
+.formArea .writeRow.gender span input {position:absolute;display:block;left:0;opacity:0;width:100%;height:100%;background:none;}
+.formArea .writeRow.gender span label {position:relative;display:block;height:40px;line-height:40px;color:#969696;text-align:center;font-size:18px;border:1px solid #d8d8d8;}
+.formArea .writeRow.gender span.on label {color:#646464;border:1px solid #e24e4e}
+.formArea .writeRow.gender:after{content:"";display:block;clear:both;}
+.formArea .writeRow.birthday {display: table;width: 100%; border: 1px solid #d8d8d8;border-bottom: none;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.formArea .writeRow.birthday span {display: table-cell;background-color: #fff;font-size: 18px;border-right: 1px solid #d8d8d8;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.formArea .writeRow.birthday span:nth-child(1) {width: 16%;background-color: #f8f8f8;text-align: center;color: #969696;}
+.formArea .writeRow.birthday span:nth-child(2) {width: 28%;}
+.formArea .writeRow.birthday span:nth-child(3) {width: 28%;padding:0 10px;}
+.formArea .writeRow.birthday span:nth-child(4) {width: 28%;border-right: none;padding:0 10px;}
+.formArea .writeRow.birthday select { height: 32px;}
+.formArea .writeRow.birthday input[type="text"] {border:none;padding: 6px 10px;}
+.formArea .writeRow.phoneNum {display: table;width: 100%; border: 1px solid #d8d8d8;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.formArea .writeRow.phoneNum span {display: table-cell;background-color: #fff;font-size: 18px;border-right: 1px solid #d8d8d8;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.formArea .writeRow.phoneNum span:nth-child(1) {width: 28%;padding:0 10px;text-align: center;color: #969696;}
+.formArea .writeRow.phoneNum span:nth-child(2) {width: 72%;border-right: none;}
+.formArea .writeRow.phoneNum select { height: 32px;}
+.formArea .writeRow.phoneNum input[type="text"] {border:none;padding: 6px 10px;}
+.formArea .writeRow2 {height: 60px;line-height: 43px;font-size: 18px;margin-bottom:20px;padding: 6px 20px;border: 1px solid #d8d8d8;background-color: #fff;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.formArea .writeRow2 input {margin: -2px 5px 0 0;}
+.formArea .btnType {position: relative;padding-right: 0px;border: 1px solid #d8d8d8;border-bottom: none;}
+.formArea .btnType input {border:none;}
+.formArea .btnType input.readonly {color: #969696;}
+.formArea .btnType button {position: absolute;right:20px;top:11px;width: 70px;height: 38px;line-height: 38px;font-size: 18px; border:1px solid #969696;background-color: #fff;outline:none;}
+.formArea .btnType button:before {content: "";display: block;position: absolute;left:-11px;top:0; width: 10px;height: 38px;background-color: #fff;}
+.formArea .btnType button.wAuto {width:auto;padding:0 10px;}
+.formArea .readtxt input.readonly {border: 1px solid #d8d8d8;border-bottom: none;color: #969696;}
+.formArea .readtxt input.readonly:focus {box-shadow:none;border: 1px solid #d8d8d8;border-bottom: none;}
+.formArea .infoTxt {font-size: 77%;color: #969696;margin-bottom: 20px;}
+.formArea .btnSecession {margin:15px 0;font-size: 93%;color: #848484;}
+.formArea .btnSecession a {display: block; line-height: 30px;}
+/* 회원가입약관 */
+.agree_txt {margin-bottom: 20px;background-color: #fff;border:1px solid #e6e6e6;}
+.agree_txt:last-child {margin-bottom: 0px;}
+.agree_txt h3 {font-size: 16px;font-weight: normal; position: relative;padding:0 18px;border-bottom:1px solid #e6e6e6;height: 59px;line-height: 59px;}
+.agree_txt h3 i.choice {color: #848484;}
+.agree_txt h3 input[type="checkbox"] {margin:-2px 10px 0 0;}
+.agree_txt .txt_box {height: 160px;overflow-y: scroll;line-height: 1.7;padding:20px;font-size: 12px;color: #969696;}
+.agree_txt .txt_box h4 {margin: 15px 0 3px;font-weight: normal;}
+.agree_txt .txt_box h4:first-child {margin-top: 0px;}
+.agree_txt .txt_box ol li ol li {padding-left: 15px;}
+.agree_txt .txt_box table {margin: 10px 0;}
+.agree_txt .txt_box table th,
+.agree_txt .txt_box table td {border:1px solid #d8d8d8;text-align: center;}
+.agree_txt .txt_box table td.red {color: #e24e4e}
+.agree_txt.termsChkAll {border:1px solid #969696;}
+.agree_txt.termsChkAll h3 {border-bottom:none;padding-top: 5px;padding-bottom: 0px;height: 40px;line-height: 40px;color: #4e4e4e;}
+.agree_txt.termsChkAll .txt_box {height: auto;overflow-y: hidden;padding: 0px 10px 15px 40px;}
+.joinForm.guideCase {width:1000px;}
+.joinForm.guideCase .agree_txt .txt_box {height:auto;overflow-y:auto;font-size:14px;}
+/* 2017-08-03 */
+.changeInfo {font-size:18px;}
+.changeInfo .pwReset {width:100%;margin:11px auto 11px;text-align: center;color: #4e4e4e;}
+.changeInfo input[type="text"],
+.changeInfo input[type="password"],
+.changeInfo input[type="number"],
+.changeInfo input[type="tel"] {margin-bottom:5px;}
+.changeInfo .pwForm {margin:0 11px;}
+.changeInfo .pwForm .btn_pwreset span button {margin:18px 0;font-weight: normal;height: 48px;padding:0px;}
+.changeInfo .memSecession {width:100%;margin:11px auto 11px;text-align: center;color: #4e4e4e;}
+.changeInfo .pwPractician {width:100%;margin:11px auto 11px;text-align: center;color: #4e4e4e;}
+/* 2017-09-04 */
+.sitemap .dataSet {width: 1214px; margin:0 auto;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.sitemap .dataSet h2 {padding:40px 0;font-size:26px;font-weight:normal;text-align: center;font-size: 34px;}
+.sitemap .dataSet h2:before {content: "";display: block;margin:0 auto; width:39px;height: 40px;background: url('../images/sub/img_sitemap.png') no-repeat;}
+.sitemap .dataSet h2 em {display: block;font-size:18px;font-weight:normal;font-size: 18px;color:#969696;}
+.sitemap .sitemapBack {display:inline-block;width:100%;}
+.sitemap .sitemapBack dl {float:left;padding:85px 90px 120px 0;width:344px;}
+.sitemap .sitemapBack dl.three {padding:85px 0 120px 0;}
+.sitemap .sitemapBack dl dt {padding:0 0 0 30px;height:58px;font-size:22px;color:#e24e4e;line-height:58px;border-bottom:2px solid red;background:#fff;}
+.sitemap .sitemapBack dl dd a {display:inline-block;padding:0 0 0 30px;width:100%;height:58px;font-size:18px;color:#848484;line-height:58px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border-bottom:1px solid #d8d8d8;}

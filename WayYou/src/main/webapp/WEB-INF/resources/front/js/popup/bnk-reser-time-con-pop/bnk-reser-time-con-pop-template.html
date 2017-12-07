@@ -1,0 +1,24 @@
+<!-- 2017-07-22 시간요청 -->
+<div class="popupsmallWrap reserTimeConfirm p-container"  ng-init="templateInit()">
+	<!-- popup header -->
+	<div class="popupHeader">
+		<header><h1>예약시간 승인요청</h1></header>
+		<a class="btnClose p-close">닫기</a>
+	</div>
+	<hr/>
+	<!-- popup contents -->
+	<div class="popupContents">
+		<section>
+			<div class="contentsBack">
+				<p>{{res.resYear}}년 {{res.resMonth}}월 {{res.resDay}}일 
+				<em ng-if="res.resAmpm == 'AM'">오전</em> <em ng-if="res.resAmpm == 'PM'">오후</em> {{res.resTime}}시로 <br/>예약시간을 승인하시겠습니까?</p>
+			</div>
+			<div class="btnSet">
+				<span><button class="redLine" ng-click="confirmRefusalClick('N', res)">거절</button></span>
+				<span><button class="red" ng-click="confirmRefusalClick('C', res)">승인</button></span>
+			</div>
+		</section>
+	</div>
+	<!-- //-->
+</div>
+<!-- //시간요청  -->

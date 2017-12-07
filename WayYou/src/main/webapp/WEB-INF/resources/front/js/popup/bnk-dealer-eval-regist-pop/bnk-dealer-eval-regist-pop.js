@@ -1,0 +1,118 @@
+/**
+ * 딜러 프로필 상세
+ *
+ * hk-lee
+ *
+ **/
+angular.module('bnk-common.directive')
+.directive('dealerEvalRegistPop', function ($timeout, $rootScope) {
+
+/* ####################################################################################
+ * ## 팝업 상수설정														  				 ##
+ * #################################################################################### */
+
+	var PARENT_ID = 'wrap_back';				// 고정
+	var TEMPLATE_ID = 'dealer-eval-regist-pop';	// 변경 <= 팝업ID(폴더,파일명)
+
+/* #################################################################################### */
+
+	return {
+
+		/* [scope 옵션]
+		 * 	 - scope : false -> 새로운 scope 객체를 생성하지 않고 부모가 가진 같은 scope 객체를 공유. (default 옵션)
+		 * 	 - scope : true -> 새로운 scope 객체를 생성하고 부모 scope 객체를 상속.
+		 * [binding 옵션]
+		 *   - = : 부모 scope의 property와 디렉티브의 property를 data binding하여 부모 scope에 접근
+		 *   - @ : 디렉티브의 attribute value를 {{}}방식(interpolation)을 이용해 부모 scope에 접근
+		 *   - & : Two-way Binding 없이 각 Directive에서 사용하는 데이터를 상위 스코프로 전달할 수 있다.
+		 */
+		scope: {
+			oParams: '=params'
+			, onLoadCallback: '&onLoadCallback'
+		},
+		restrict: 'E',		// E : elements, A : attributes, C : class name (CSS), M : comments
+		replace: true, 		// directive를 설정한 태그를 템플릿 태그로 교체하고자 할때 따라서 template 또는 templateUrl과 함께 사용한다
+//		transclude: false,	// ngTransclude를 통하여 DOM에 transcluded DOM을 insert 할 수 있다
+//							// transcluded DOM을 template에서 ngTransclude directive에 삽입한다
+		link: function(scope, element, attrs) {
+			scope.contentUrl = BNK_CTX + '/front/js/popup/bnk-'+ TEMPLATE_ID +'/bnk-'+ TEMPLATE_ID +'-template.html';
+		},
+		template: '<div id="'+TEMPLATE_ID+'" ng-include="contentUrl"></div>',
+		controller: function($scope, $http, $util, $filter){
+
+		/* ####################################################################################
+		 * ## 멤버 초기값 설정													  				 ##
+		 * #################################################################################### */
+
+			// 팝업 초기화
+			$scope.$this = {};	// 팝업객체
+			$scope.templateInit = function(){
+				$scope.$this = ITCButton.initPopup(angular.element('#'+TEMPLATE_ID).find('.popupWrap'), 'full');
+				ITCButton.setupTypePopup(angular.element('#'+TEMPLATE_ID).find('.popupWrap'));
+				ITCButton.setupTypeToggleAndTab();	// 탭 설정
+				$scope.$this.onOpenHandle = function(){
+					//평가 추가후 Callback 내용
+					$scope.eval.evalDiv = '';
+					$scope.eval.rating = '';
+					$scope.eval.reviews = '';
+					$scope.eval.dealerId = '';
+				};
+				$rootScope.$broadcast(TEMPLATE_ID, {});
+			};
+
+			$scope.$on('onCodeReady', function (event, data) {
+				$scope.evalDivCodeList = evalDivCodeList;
+				$scope.shopCodeInfoMap=shopCodeInfoMap;
+			});
+
+			$scope.param={};
+			$scope.param.dealerEvalList = [];
+			$scope.param.curPage = 1;
+			$scope.param.totPage = 0;
+
+			$scope.eval = {};
+			$scope.eval.evalDiv = '';
+			$scope.eval.rating = '';
+			$scope.eval.reviews = '';
+			$scope.eval.dealerId = '';
+			$scope.eval.init = function(){
+				angular.element('#evalRating').rateit();
+				$scope.eval.rating =	angular.element('#evalRating').rateit('value');
+			}
+			$scope.eval.regist = function(){
+				$scope.eval.rating =	angular.element('#evalRating').rateit('value');
+				$scope.eval.dealerId =	$scope.oParams.user.userId;
+
+				if($util.isEmpty($scope.eval.evalDiv)){
+					alert("평가 구분을 선택해주세요.");
+					return;
+				}
+				if($util.isEmpty($scope.eval.rating)){
+					alert("평점을 입력해주세요.");
+					return;
+				}
+
+
+				var warningMsg = $scope.eval.reviews;
+				if($util.isNotEmpty(warningMsg)){
+					alert("“사실과 다른 내용은 관리자에 의해 강제 삭제됩니다.”");
+				}
+
+				$http({
+					url: BNK_CTX + '/api/user/registDealerEval'
+					, method: 'POST'
+					, data: JSON.stringify({eval:$scope.eval})
+				}).then(function(json){
+					$scope.$this.close();
+					$scope.$this.complete();
+				}, function(){
+
+				});
+			}
+
+
+
+
+		}
+	};
+})

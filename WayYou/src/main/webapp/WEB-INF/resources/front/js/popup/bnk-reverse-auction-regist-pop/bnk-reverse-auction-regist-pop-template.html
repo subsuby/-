@@ -1,0 +1,143 @@
+<!-- 내게맞는매물등록 -->
+<div class="popupWrap likeRecord p-container" ng-init="templateInit()">
+	<form name="form">
+	<!-- popup header -->
+	<div class="popupHeader">
+		<header><h1>내게맞는매물등록</h1></header>
+		<a class="btnClose p-close" onclick="return false;">닫기</a>
+	</div>
+	<hr/>
+	<!-- popup contents -->
+	<div class="popupContents">
+		<section>
+			<div class="btn-accordion-wrapper writeType" data-toggle-on="true">
+
+				<!--제조사 선택-->
+				<dl class="btn-accordion-switch accordionSet" ng-class="{on: car.focus.makerCd}" ng-click="onToggle('ACCD_MAKER')">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.makerLabel.length > 0}">제조사</span>
+						</strong>
+						<span class="col">
+							<span>{{car.makerLabel.length > 0 ? car.makerLabel : '제조사를 선택하세요'}} </span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<ul class="radioList">
+							<li ng-repeat="(key, value) in makerList">
+								<input type="radio" id="r_a{{$index}}" name="r_a" ng-model="car.makerCd" value="{{key}}" ng-click="onClick('ACCD_MAKER', $event, value)" /><label for="r_a{{$index}}">{{value}}</label>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<!--제조사 선택-->
+
+				<!--모델 선택-->
+				<dl class="btn-accordion-switch accordionSet" ng-class="{on: car.focus.modelCd}" ng-click="onToggle('ACCD_MODEL')">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.modelLabel.length > 0}">모델</span>
+						</strong>
+						<span class="col">
+							<span>{{car.modelLabel.length > 0 ? car.modelLabel : '모델을 선택하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<ul class="radioList">
+							<li ng-repeat="(key, value) in carCodeSearchMap[car.makerCd]">
+								<input type="radio" id="r_b{{$index}}" name="r_b" ng-model="car.modelCd" value="{{key}}" ng-click="onClick('ACCD_MODEL', $event, value)"><label for="r_b{{$index}}">{{value}}</label>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<!--모델 선택-->
+
+				<!-- 세부모델 선택-->
+				<dl class="btn-accordion-switch accordionSet" ng-class="{on: car.focus.modelDtlCd}" ng-click="onToggle('ACCD_DTL_MODEL')">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.modelDtlLabel.length > 0}">세부모델</span>
+						</strong>
+						<span class="col">
+							<span>{{car.modelDtlLabel.length > 0 ? car.modelDtlLabel : '세부모델을 선택하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<ul class="radioList">
+							<li ng-repeat="(key, value) in carCodeSearchMap[car.modelCd]">
+								<input type="radio" id="r_c{{$index}}" name="r_c" ng-model="car.modelDtlCd" value="{{key}}" ng-click="onClick('ACCD_DTL_MODEL', $event, value)"><label for="r_c{{$index}}">{{value}}</label>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<!-- 세부모델 선택-->
+
+				<!-- 주행거리 입력 -->
+				<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.useKm.length > 0}">주행거리</span>
+						</strong>
+						<span class="col">
+							<span>{{car.useKm.length > 0 ? car.useKm : '주행거리를 입력하세요 (km)'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<div class="pt12"><input type="text" name="useKm" ng-model="car.useKm"></div>
+					</dd>
+				</dl>
+				<!-- 주행거리 입력 -->
+
+				<!-- 연식 입력 -->
+				<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.carRegYear.length > 0}">연식</span>
+						</strong>
+						<span class="col">
+							<span>{{car.carRegYear.length > 0 ? car.carRegYear : '연식을 입력하세요 (YYYY)'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<ul class="radioList">
+							<div class="pt12"><input type="text" name="carRegYear" maxlength="4" ng-model="car.carRegYear" /></div>
+						</ul>
+					</dd>
+				</dl>
+				<!-- 연식 입력 -->
+
+				<!-- 색상 입력 -->
+				<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.colorLabel.length > 0}">색상</span>
+						</strong>
+						<span class="col">
+							<span>{{car.colorLabel.length > 0 ? car.colorLabel : '색상을 선택하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<ul class="radioList">
+							<li ng-repeat="colorType in colorTypeCodeList">
+								<input type="radio" id="r_f{{$index}}" name="carColor" ng-model="car.carColor" value="{{colorType.cdDtlNo}}" ng-click="onClick('ACCD_COLOR', $event, colorType.cdDtlNm)"/>
+								<label for="r_f{{$index}}">{{colorType.cdDtlNm}}</label>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<!-- 색상 입력 -->
+			</div>
+			<!-- 등록 -->
+			<div class="btnSet pt12" ng-if="oParams.reverAuctionInfo == null">
+				<span><button class="red" ng-click="regist(form)">신청하기</button></span>
+			</div>
+			<!--  -->
+			<!-- 수정 -->
+			<div class="btnSet pt12" ng-if="oParams.reverAuctionInfo != null">
+				<span><button class="red" ng-click="modify(form)">수정하기</button></span>
+			</div>
+		</section>
+	</div>
+	</form>
+</div>
+<!-- //내게맞는매물등록 -->

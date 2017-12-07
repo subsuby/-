@@ -1,0 +1,5 @@
+ERD Plugin Setting
+
+Help -> Install New Software
+
+http://ermaster.sourceforge.net/update-site

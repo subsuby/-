@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<!-- 사용자 레이아웃 템플릿 정의 -->
+	<definition name="tiles.layout.front.template" 	template="/WEB-INF/views/template/layout/front/template.jsp">
+		<put-attribute name="meta" 				value="/WEB-INF/views/template/layout/front/meta.jsp" />
+		<put-attribute name="header" 			value="/WEB-INF/views/template/layout/front/header.jsp" />
+		<put-attribute name="slide-l" 			value="/WEB-INF/views/template/layout/front/slide-l.jsp" />
+		<put-attribute name="slide-r" 			value="/WEB-INF/views/template/layout/front/slide-r.jsp" />
+		<put-attribute name="footer" 			value="/WEB-INF/views/template/layout/front/footer.jsp" />
+		<put-attribute name="scripts" 			value="/WEB-INF/views/template/layout/front/scripts.jsp" />
+	</definition>
+
+	<!--  사용자 템플릿 정의 -->
+	<definition name="tiles.front.*.*.*.*.*" extends="tiles.layout.front.template">
+		<put-attribute name="contents-js" 		value="/WEB-INF/views/front/{1}/{2}/{3}/{4}/{5}-js.jsp" />
+		<put-attribute name="contents" 			value="/WEB-INF/views/front/{1}/{2}/{3}/{4}/{5}.jsp" />
+		<put-attribute name="contents-popup" 	value="/WEB-INF/views/front/{1}/{2}/{3}/{4}/{5}-popup.jsp" />
+		<put-attribute name="angularCtrl" 		value="ctrl.{1}.{2}.{3}.{4}.{5}" />
+	</definition>
+	<definition name="tiles.front.*.*.*.*" extends="tiles.layout.front.template">
+		<put-attribute name="contents-js" 		value="/WEB-INF/views/front/{1}/{2}/{3}/{4}-js.jsp" />
+		<put-attribute name="contents" 			value="/WEB-INF/views/front/{1}/{2}/{3}/{4}.jsp" />
+		<put-attribute name="contents-popup" 	value="/WEB-INF/views/front/{1}/{2}/{3}/{4}-popup.jsp" />
+		<put-attribute name="angularCtrl" 		value="ctrl.{1}.{2}.{3}.{4}" />
+	</definition>
+	<definition name="tiles.front.*.*.*" extends="tiles.layout.front.template">
+		<put-attribute name="contents-js" 		value="/WEB-INF/views/front/{1}/{2}/{3}-js.jsp" />
+		<put-attribute name="contents" 			value="/WEB-INF/views/front/{1}/{2}/{3}.jsp" />
+		<put-attribute name="contents-popup" 	value="/WEB-INF/views/front/{1}/{2}/{3}-popup.jsp" />
+		<put-attribute name="angularCtrl" 		value="ctrl.{1}.{2}.{3}" />
+	</definition>
+	<definition name="tiles.front.*.*" extends="tiles.layout.front.template">
+		<put-attribute name="contents-js" 		value="/WEB-INF/views/front/{1}/{2}-js.jsp" />
+		<put-attribute name="contents" 			value="/WEB-INF/views/front/{1}/{2}.jsp" />
+		<put-attribute name="contents-popup" 	value="/WEB-INF/views/front/{1}/{2}-popup.jsp" />
+		<put-attribute name="angularCtrl" 		value="ctrl.{1}.{2}" />
+	</definition>
+	<definition name="tiles.front.*" extends="tiles.layout.front.template">
+		<put-attribute name="contents-js" 		value="/WEB-INF/views/front/{1}-js.jsp" />
+		<put-attribute name="contents" 			value="/WEB-INF/views/front/{1}.jsp" />
+		<put-attribute name="contents-popup" 	value="/WEB-INF/views/front/{1}-popup.jsp" />
+		<put-attribute name="angularCtrl" 		value="ctrl.{1}" />
+	</definition>
+
+
+
+	<!-- //////////////////////////////// 단일 레이아웃 JSP 정의 영역 ///////////////////////////////// -->
+
+    <!-- Front Login Page -->
+    <definition name="tiles.layout.front.forward.bnkcapital" template="/WEB-INF/views/front/forward/bnkcapital.jsp"></definition>
+	<!-- 실서버 임시 index 페이지 -->
+	<!-- <definition name="tiles.main.index" extends="tiles.layout.template"/> -->
+
+	<!-- 임시 사용자 웹 브라우저 정보 페이지 -->
+	<!-- <definition name="tiles.rest.app.userAgent" template="/WEB-INF/views/main/userAgent.jsp"/> -->
+
+
+</tiles-definitions>

@@ -1,0 +1,182 @@
+<!-- 방문견적신청 -->
+<div class="popupWrap visitApp p-container" ng-init="templateInit()">
+    <!-- popup header -->
+    <div class="popupHeader">
+        <header><h1>방문견적신청</h1></header>
+        <a class="btnClose p-close">닫기</a>
+    </div>
+    <hr/>
+    <!-- popup contents -->
+    <div class="popupContents">
+        <section>
+            <div class="btn-accordion-wrapper writeType" data-toggle-on="true">
+                <!---->
+                <div class="accordionSet inputCase writeInput">
+                    <strong class="col">
+                        <span>방문선택</span>
+                    </strong>
+                    <span class="col">
+                        <span class="checkSet">
+                            <input type="checkbox" id="c_c1_visit" ng-model="visit.visitType" ng-true-value="'1'" ng-false-value="''"/>
+                            <label for="c_c1_visit">직접방문</label>
+                        </span>
+                        <span class="checkSet">
+                            <input type="checkbox" id="c_c2_visit" ng-model="visit.visitType" ng-true-value="'2'" ng-false-value="''"/>
+                            <label for="c_c2_visit">방문요청</label>
+                        </span>
+                    </span>
+                </div>
+                <!-- 2017-06-14 -->
+                <!-- 입력부분 노출영역으로 변경 -->
+                <div class="accordionSet inputCase writeInput">
+                    <strong class="col">
+                        <span>차량번호</span>
+                    </strong>
+                    <span class="col">{{oParams.carPlateNum}}</span>
+                </div>
+                <!---->
+                <div class="accordionSet inputCase writeInput">
+                    <strong class="col">
+                        <span>제조사</span>
+                    </strong>
+                    <span class="col">{{oParams.label.makerName}}</span>
+                </div>
+                <!---->
+                <div class="accordionSet inputCase writeInput">
+                    <strong class="col">
+                        <span>모델</span>
+                    </strong>
+                    <span class="col">{{oParams.label.modelName}}</span>
+                </div>
+                <!---->
+                <div class="accordionSet inputCase writeInput">
+                    <strong class="col">
+                        <span>세부모델</span>
+                    </strong>
+                    <span class="col">{{oParams.label.modelDtlName}}</span>
+                </div>
+                <!-- //입력부분 노출영역으로 변경 -->
+                <!-- 직접방문일 경우 -->
+                <div class="accordionSet inputCase writeInput" ng-show="visit.visitType == '1'">
+                    <strong class="col">
+                        <span>소속단체</span>
+                    </strong>
+                    <span class="col">
+                        <input type="text" ng-model="visit.reqDanjiName" style="width:auto;" readonly class="readonly" />
+                        <button type="button" class="searchArea" ng-click="onOpenPopup('DANJI_POP')">검색</button>
+                    </span>
+                </div>
+                <div class="accordionSet inputCase writeInput" ng-show="visit.visitType == '1'">
+                    <strong class="col">
+                        <span>소속상사</span>
+                    </strong>
+                    <span class="col">
+                        <input type="text" ng-model="visit.reqShopName" style="width:auto;" readonly class="readonly" />
+                        <button type="button" class="searchArea" ng-click="onOpenPopup('SHOP_POP')">검색</button>
+                    </span>
+                </div>
+                <!-- //직접방문일 경우 -->
+                <!-- //2017-06-14 -->
+                <dl class="btn-accordion-switch accordionSet" ng-show="visit.visitType == '2'" ng-click="doFocus($event)">
+                    <dt class="accordionTitle btn-accordion-switch-item">
+                        <strong class="col">
+                            <span>방문지주소</span>
+                        </strong>
+                        <span class="col">
+                            <span id="visitAddr">{{visit.visitZip.length > 0 ? visit.visitAddr1 :'주소를 입력하세요'}}</span> <!-- 2017-06-14 -->
+                        </span>
+                    </dt>
+                    <dd class="accordionData">
+                        <div class="pt12">
+                            <div class="btnType">
+                                <input type="text" placeholder="우편번호" ng-model="visit.visitZip" class="readonly" readonly />
+                                <label for="" class="dpn">우편번호</label>
+                                <button ng-click="onOpenPopup('ADDR_POP')">변경</button>
+                            </div>
+                            <div class="readtxt">
+                                <input type="text" placeholder="주소" ng-model="visit.visitAddr1" class="readonly" readonly />
+                                <label for="" class="dpn">주소</label>
+                            </div>
+                            <div class="readtxt lastRow">
+                                <input type="text" placeholder="상세주소" ng-model="visit.visitAddr2" class="readonly" readonly />
+                                <label for="" class="dpn">상세주소</label>
+                            </div>
+                        </div>
+                    </dd>
+                </dl>
+                <!---->
+                <dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+                    <dt class="accordionTitle btn-accordion-switch-item">
+                        <strong class="col">
+                            <span>연락처</span>
+                        </strong>
+                        <span class="col">
+                            <span>{{visit.visitUserTel.length > 0 ? visit.visitUserTel : '연락처를 입력하세요'}}</span>
+                        </span>
+                    </dt>
+                    <dd class="accordionData">
+                        <div class="pt12"><input type="text" name="visitUserTel" ng-model="visit.visitUserTel" /></div>
+                    </dd>
+                </dl>
+                <!---->
+				<dl class="btn-accordion-switch accordionSet">
+					<dt class="accordionTitle btn-accordion-switch-item">								
+						<strong class="col">
+							<span>예약날짜</span>
+						</strong>
+						<span class="col">
+							<span>{{visit.year.length > 0 || visit.month.length > 0 || visit.day.length > 0 ? visit.year+'년'+visit.month+'월'+visit.day+'일' : '날짜를 선택하세요.'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<div class="pt12">
+							<div class="gridSet timeSelect">
+								<div class="gridItem gI-4">
+									<span class="selectSet">
+										<select ng-model="visit.year" ng-change="onChange('YEAR', visit.year)">
+											<option ng-repeat="year in date.years" value="{{year}}">{{year}}년</option>
+										</select>
+									</span>
+								</div>
+								<div class="gridItem gI-2">
+									<span class="selectSet">
+										<select ng-model="visit.month" ng-change="onChange('MONTH', visit.month)">
+											<option ng-repeat="month in date.months" value="{{month}}">{{month}}월</option>
+										</select>
+									</span>
+								</div>
+								<div class="gridItem gI-2">
+									<span class="selectSet">
+										<select ng-model="visit.day" ng-change="onChange('DAY', visit.day)">
+											<option ng-repeat="day in date.days" value="{{day}}">{{day}}일</option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>
+					</dd>
+				</dl>
+            <!---->
+            <div class="accordionSet inputCase writeInput">
+                <strong class="col">
+                    <span>부가서비스</span>
+                </strong>
+                <span class="col">
+                    <span class="checkSet"><input type="checkbox" id="c_1_mkup" ng-model="visit.consignYn" ng-true-value="'Y'" ng-false-value="'N'" /><label for="c_1_mkup">Make up 포함</label></span>
+                    <span class="checkSet"><input type="checkbox" id="c_2_sell" ng-model="visit.makeupYn" ng-true-value="'Y'" ng-false-value="'N'" /><label for="c_2_sell">위탁판매 포함</label></span>
+                </span>
+            </div>
+            <!---->
+            </div>
+            <div class="btnSet pt12">
+                <span class="wHalf">
+                	<button type="button" class="redLine"	ng-click="onClick('BTN_CANCEL')">취소</button>
+                </span>
+                <span>
+                	<button type="button" class="red"		ng-click="onClick('BTN_APPLY')">신청하기</button>
+                </span>
+            </div>
+        </section>
+    </div>
+</div>
+<!-- //방문견적신청 -->

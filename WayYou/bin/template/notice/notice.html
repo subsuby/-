@@ -1,0 +1,180 @@
+<!DOCTYPE>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type='text/css'>
+table.gridtable {
+	margin: 10px;
+	color: #333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	height: 25px;
+	font-size: 12px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	font-size: 12px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+
+table.gridtable td p, table.gridtable td b {
+	padding: 0;
+	font-size: 12px;
+}
+
+table.texttable {
+	color: #333333;
+	border-width: 0px;
+}
+
+table.texttable td {
+	border-width: 0px;
+	padding: 8px;
+}
+
+body {
+	margin: 0;
+	font-family: arial, sans-serif;
+	font-size: 12px;
+	color: #666;
+}
+
+b {
+	font-size: 1.25em;
+	color: #000;
+}
+
+p {
+	margin: 0;
+	padding: 10px;
+}
+
+h2.title {
+	position: relative;
+	margin: 0;
+	padding: 1.25em 1em 1em;
+	overflow: hidden;
+	font-size: 1.25em;
+	color: #fff;
+	background: #980432;
+}
+
+h2.title sup {
+	font-size: 12px;
+	color: #666;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.bdTop {
+	margin-top: 30px;
+	padding-top: 30px;
+	border-top: 1px solid #888;
+}
+</style>
+</head>
+<body>
+	<!-- OSS-Notice-ID_ProjectName을 고지문구 우상단에 머리글 형태로 삽입 -->
+	<h2 class="title">
+		<strong class="left">$!{companyNameShot} Open Source Software Notice</strong> <label
+			class="right"> <sup>OSS-Notice-ID_$!{prjName}-$!{date}</sup>
+		</label>
+	</h2>
+
+	<!-- default 문구 -->
+	<p>This product from $!{companyNameFull}. (&quot;$!{companyNameShot}&quot;)
+		contains the open source software detailed below. Please refer to the
+		indicated open source licenses (as are included following this notice)
+		for the terms and conditions of their use.</p>
+
+	<!-- 소스 공개가 필요한 OSS 목록 및 문구 (License type이 Copyleft, Weak Copyleft 인 OSS) -->
+	<!-- OSS name 항목에는 Download URL link -->
+	<!-- License 항목에는 page내 하단의 License Text link -->
+	<!-- 만약, 소스 공개가 필요한 OSS가 사용되지 않은 Project일 경우, 이 table은 표시되지 않음.  -->
+	#if($!{openSourceListSize} != "0")
+	<table class="gridtable">
+		<tr>
+			<th width=182>Open Source</th>
+			<th width=159>License</th>
+			<th width=443>Copyright</th>
+		</tr>
+		#foreach( $!{openSource} in $!{openSourceList} ) 
+		<tr>
+			<td>
+				#if($!{openSource.downloadLocation} != "")<a href=$!{openSource.downloadLocation}>$!{openSource.ossName}</a>#end
+				#if($!{openSource.downloadLocation} == "")$!{openSource.ossName}#end
+			</td>
+			<td><a href="#$!{openSource.licenseName}$!{openSource.licenseVersion}">$!{openSource.licenseName}$!{openSource.licenseId}</a></td>
+			<td>$!{openSource.copyrightText}</td>
+		</tr>
+		#end
+	</table>
+	#end	
+
+	<!--  소스 공개가 불필요한 OSS 에 대한 문구  -->
+	<!-- 만약, 소스 공개가 필요한 OSS가 사용되지 않은 Project일 경우, 이 문구는 표시되지 않음.  -->
+	#if($!{closeSourceListSize} != "0")
+	<p>
+		The source code for the above may be obtained free of charge from $!{companyNameShot}
+		at <a href= $!{distributionSiteUrl} target='_blank'>$!{distributionSiteUrl}</a>
+		$!{companyNameShot} will also provide open source code to you on CD-ROM for a charge
+		covering the cost of performing such distribution (such as the cost of
+		media, shipping, and handling) upon email request to
+		$!{email}. This offer is valid for three (3) years from the
+		date on which you purchased the product.<br> <br>Please be
+		informed that $!{companyNameFull} products may contain open source software
+		listed in the tables below.
+	</p>
+
+	<!-- 소스 공개가 불필요한 OSS 목록 (License type이 Permissive인 OSS) -->
+	<!-- OSS name 항목에는 Download URL link -->
+	<!-- License 항목에는 page내 하단의 License Text link -->
+	<!-- OSS name이 없는 경우 - 공란 -->
+	<!-- License name이 없는 경우 - LICENSE-1 과 같은 형태로 numbering하여 표시. 여기서 numbering인 본 고지문구 내에서만 unique한 값.  -->
+	<!-- 만약, License Type이 Permissive인 OSS가 사용되지 않은 Project일 경우, 이 table은 표시되지 않음. 	 -->
+	
+	<table class="gridtable">
+		<tr>
+			<th width=182>Open Source</th>
+			<th width=159>License</th>
+			<th width=443>Copyright</th>
+		</tr>
+		#foreach( $!{closeSource} in $!{closeSourceList} ) 
+		<tr>
+			<td><a href=$!{closeSource.downloadLocation}>$!{closeSource.ossName}</a></td>
+			<td>$!{closeSource.licenseName}</td>
+			<td>$!{closeSource.copyrightText}</td>
+		</tr>
+		#end
+	</table>
+	#end
+
+	<!-- License Name, License text 	 -->
+	#foreach( $!{license} in $!{licenseList} ) 
+	<p class="bdTop" id="$!{license.licenseName}$!{license.licenseVersion}">
+		<b>$!{license.licenseName}</b><br> <br>
+		<br>$!{license.licenseText}<br>
+	</p>
+	#end
+</body>
+</html>

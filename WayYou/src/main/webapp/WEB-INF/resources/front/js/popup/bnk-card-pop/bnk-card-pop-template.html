@@ -1,0 +1,36 @@
+<!-- 명함발송 -->
+<div class="popupWrap businesscard p-container" ng-init="templateInit()">
+	<!-- popup header -->
+<div class="popupHeader">
+	<header><h1>명함발송</h1></header>
+	<a class="btnClose p-close" onclick="return false;">닫기</a>
+</div>
+<hr/>
+<!-- popup contents -->
+<div class="popupContents">
+	<section>
+		<div class="innerLayout">
+			<div class="dealerArea">
+				<span class="thumProfile">
+					<img src="/m/front/images/thumbnail/profile2.png" alt="" />
+				</span>
+				<div>
+					<span class="levelBadge level3"><span><strong>{{user.userName}}</strong> 딜러</span></span><br/>
+					<em>
+						<i>종사원번호</i> {{user.dealerLicenseNo}}<br>
+						{{user.dealerDanjiName}} {{user.dealerShopName}}
+					</em>
+					<p>{{user.dealerProfileDesc.length > 0 ? user.dealerProfileDesc : '등록된 메모가 없습니다.'}}</p>
+					<a href="tel:{{user.dealerProfileTel}}">{{user.dealerProfileTel.length > 0 ? user.phoneMobile : '등록된 연락처가 없습니다.'}}</a>
+				</div>
+			</div>
+			<div class="btnSet">
+<!-- 				<span><a class="redLine" ng-click="modifyClick()" onclick="return false;">수정하기</a></span> -->
+				<span><a href="" class="red" ng-click="sendClick()">전송하기</a></span>
+					<a style="display:none;" href="" class="btn-popup-full" id="sendBtn" data-pop-opts='{"target": ".popSend"}'>전송하기</a>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+<!-- //명함발송 -->

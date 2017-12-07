@@ -1,0 +1,51 @@
+<!--
+
+	* BNK시세
+	* hk-lee ------ 2017.07.03
+-->
+<div class="pGraphSet">
+	<div class="pGraphCanvas">
+		<div class="pgCar" style="display:none">
+			<div class="pgPos">
+				<!-- div : 노란색 도로와 동일하게 자동차 위치 1차 지정 -->
+				<!-- em : 1차 지정 후 실제 빨간도로 내에서 2차 위치 지정 -->
+
+				<div ng-if="params.est_state == 3"><em><strong><span>{{params.amt | number}}</span>만원</strong></em></div>
+				<div ng-if="params.est_state != 3"><em class="noneCase"><strong>{{params.amt_txt}}</strong></em></div>
+			</div>
+		</div>
+		<div class="pRoad">
+			<div class="pRail"><span></span></div>
+			<div class="pSection" style="display:none">
+				<div><span><em><!-- BNK시세영역 --></em></span></div>
+				<!-- 노란색 도로 (BNK시세영역) : 시작점 - 기본0 이후 %로 가감하여 적용 / 가격넓이 % 가감 -->
+			</div>
+		</div>
+		<div class="pNumber">
+			<div><!-- 가격은 총 5개로 나뉘며, 각 단계별 20%  -->
+				<span>{{params.min | number}}</span>
+				<span></span>
+				<span>{{params.mid | number}}</span>
+				<span></span>
+				<span>{{params.max | number}}</span>
+			</div>
+		</div>
+	</div>
+	<!-- //2017-05-29 -->
+	<!---->
+	<div class="pGraphInfo">
+		<ul>
+			<li>
+				<span>내차견적가</span>
+				<strong ng-show="params.est_state == 3">{{params.amt | number}} <i>만원</i></strong>
+				<strong ng-show="params.est_state != 3"><i>{{params.bot_txt}}</i></strong>
+			</li>
+			<li>
+				<span>신차출고가</span>
+				<strong>{{params.new_min | number}} ~ {{params.new_max | number}} <i>만원</i></strong>
+			</li>
+		</ul>
+	</div>
+	<!---->
+</div>
+<!-- //pGraphSet -->

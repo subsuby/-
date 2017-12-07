@@ -1,0 +1,88 @@
+<!-- 비용계산기 결과 -->
+<div class="popupWrap popWrapCost2 p-container" ng-init="templateInit()">
+	<!-- popup header -->
+	<div class="popupHeader">
+		<header>
+			<h1>
+				<span ng-if="check.state == 'cost'">비용계산기</span>
+				<span ng-if="check.state == 'mycar'">{{car.createdDate}} {{car.userName}} 고객용</span>
+				<span ng-if="check.state == 'mycar1'">{{car.createdDate}} {{car.userName}} 딜러</span>
+			</h1>
+		</header>
+		<a class="btnClose p-close" onclick="return false;">닫기</a>
+	</div>
+	<hr/>
+	<!-- popup contents -->
+	<div class="popupContents">
+		<section>
+			<div class="innerLayout m0">
+				<div class="btn-accordion-wrapper calList" data-toggle-on="true">
+					<dl class="btn-accordion-switch accordionSet on">
+						<dt class="accordionTitle btn-accordion-switch-item">구매차량정보</dt>
+						<dd class="accordionData">
+							<ul class="infoList">
+								<li class="w50p">
+									<span><strong>차량번호</strong><em>{{car.carPlateNum}}</em></span>
+									<span><strong>차종</strong><em>{{car.carMakerName}} {{car.carModelName}}</em></span>
+								</li>
+								<li class="w50p">
+									<span><strong>연식</strong><em>{{car.carRegyear}}</em></span>
+									<span><strong>국산/수입</strong><em>{{car.carNationName}}</em></span>
+								</li>
+								<li class="w50p">
+									<span><strong>승용/승합/화물</strong><em>{{car.carCarkindName}}</em></span>
+									<span><strong>잔존율</strong><em>{{car.carRemainRate}}</em></span>
+								</li>
+								<li><strong>과세표준</strong><em>{{car.cost.carStandTax.str}}</em></li>
+								<li><strong>신차가격 <i>VAT 제외</i></strong><em>{{car.cost.carNewPrice.str}}</em></li>
+								<li class="purPrice"><strong>차량구매가격</strong><em>{{car.cost.carSalePrice.str}}</em></li>
+								<li class="w50p">
+									<span><strong>등록지역</strong><em>{{car.carRegAreaLabel}}</em></span>
+									<span><strong>용도구분</strong><em>{{car.carUseLabel}}</em></span>
+								</li>
+								<li><strong>{{car.carDivLabel}}</strong><em>{{car.carDetailDivLabel}}</em></li>
+							</ul>
+						</dd>
+					</dl>
+					<dl class="btn-accordion-switch accordionSet">
+						<dt class="accordionTitle btn-accordion-switch-item">이전등록비용</dt>
+						<dd class="accordionData">
+							<ul class="infoList">
+								<li><span><strong>취등록세</strong><em>{{car.cost.regCost.str}}</em></span></li>
+								<li class="w50p">
+									<span><strong>공채할인비</strong><em>{{car.cost.fundCost.str}}</em></span>
+									<span><strong>인지대</strong><em>{{car.cost.carRecognition.str}}</em></span>
+								</li>
+								<li class="w50p">
+									<span><strong>증지대</strong><em>{{car.cost.carStampCost.str}}</em></span>
+									<span><strong>번호판교체</strong><em>{{car.cost.carNumberCost.str}}</em></span>
+								</li>
+								<li class="purPrice"><strong>합계</strong><em>{{car.cost.moveCostSum.str}}</em></li>
+							</ul>
+						</dd>
+					</dl>
+					<dl class="btn-accordion-switch accordionSet">
+						<dt class="accordionTitle btn-accordion-switch-item">매매상사 부대비용</dt>
+						<dd class="accordionData">
+							<ul class="infoList">
+								<li><strong>저당비용</strong><em>{{car.cost.carMortgage.str}}</em></li>
+								<li class="w50p">
+									<span><strong>등록대행료</strong><em>{{car.cost.carRegAgency.str}}</em></span>
+									<span><strong>관리비용</strong><em>{{car.cost.carManageCost.str}}</em></span>
+								</li>
+								<li class="purPrice"><strong>합계</strong><em>{{car.cost.etcCostSum.str}}</em></li>
+							</ul>
+						</dd>
+					</dl>
+				</div>
+				<div class="allSumPrice"><strong>총 구매비용 합계</strong><em>{{car.cost.allSum.str}}</em></div>
+				<div class="btnSet pd11" ng-show="check.state == 'cost'">
+					<span><a href="" class="redLine p-close">다시계산하기</a></span>
+					<span><a href="" class="red" ng-click="costSendClick()">전송하기</a></span>
+					<a style="display:none;" href="" class="btn-popup-full" id="sendBtn" data-pop-opts='{"target": ".popSend"}'>전송하기</a>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+<!-- //비용계산기 결과 -->

@@ -1,0 +1,144 @@
+<!-- 비용계산기 -->
+	<div class="popupWrap popWrapCost p-container" ng-init="templateInit()">
+		<!-- popup header -->
+		<div class="popupHeader">
+			<header><h1>비용계산기</h1></header>
+			<a class="btnClose p-close" onclick="return false;">닫기</a>
+		</div>
+		<hr/>
+		<!-- popup contents -->
+		<div class="popupContents">
+			<section>
+				<div class="innerLayout m0">
+					<div class="btn-accordion-wrapper calList2" data-toggle-on="true">
+						<dl class="btn-accordion-switch accordionSet on" ng-click="doFocus($event)">
+							<dt class="accordionTitle btn-accordion-switch-item">차량번호 <span>번호입력</span></dt>
+							<dd class="accordionData">
+								<div class="pt12 btnType">
+									<input type="text" id="carPlateNum"/>
+									<button ng-click="searchClick()">적용</button>
+								</div>
+							</dd>
+						</dl>
+					</div>
+					<ul class="infoList type2">
+						<li><strong>차종</strong><em>{{car.carMakerName}} {{car.carModelName}}</em></li>
+						<li class="w50p">
+							<span><strong>연식</strong><em>{{car.carRegyear}}</em></span>
+							<span><strong>국산/수입</strong><em>{{car.carNationName}}</em></span>
+						</li>
+						<li class="w50p">
+							<span><strong>승용/승합/화물</strong><em>{{car.carCarkindName}}</em></span>
+							<span><strong>잔존율</strong><em>{{car.carRemainRate}}</em></span>
+						</li>
+						<li><strong>과세표준</strong><em>{{car.cost.carStandTax1.str}}</em></li>
+					</ul>
+					<div class="btn-accordion-wrapper calList2 mb20" data-toggle-on="true">
+						<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+							<dt class="accordionTitle btn-accordion-switch-item">신차가격 <i>VAT 제외</i> <span>{{car.cost.carNewPrice.str.length > 0 ? car.cost.carNewPrice.str:''}}</span></dt>
+							<dd class="accordionData">
+								<div class="pt12"><input type="text" name="newPrice" ng-model="car.cost.carNewPrice.str" value="{{car.cost.carNewPrice.str}}" /></div>
+							</dd>
+						</dl>
+						<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+							<dt class="accordionTitle btn-accordion-switch-item">과세표준 <span>{{car.cost.carStandTax.str.length > 0 ? car.cost.carStandTax.str:''}}</span></dt>
+							<dd class="accordionData">
+								<div class="pt12"><input type="text" name="standTax" ng-model="car.cost.carStandTax.str" value="{{car.cost.carStandTax.str}}" /></div>
+							</dd>
+						</dl>
+						<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+							<dt class="accordionTitle btn-accordion-switch-item">차량구매가격 <span>{{car.cost.carSalePrice.str.length > 0 ? car.cost.carSalePrice.str:''}}</span></dt>
+							<dd class="accordionData">
+								<div class="pt12"><input type="text" name="salePrice" ng-model="car.cost.carSalePrice.str" value="{{car.cost.carSalePrice.str}}"/></div>
+							</dd>
+						</dl>
+						<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+							<dt class="accordionTitle btn-accordion-switch-item">등록지역 <span>{{car.carRegAreaLabel.length > 0 ? car.carRegAreaLabel:''}}</span></dt>
+							<dd class="accordionData">
+								<ul class="radioList">
+									<li ng-repeat="area in regAreaCodeCommList">
+										<input type="radio" id="a1_c{{$index}}" name="a1_c" value="{{area.cdDtlNo}}" ng-model="car.carRegArea" ng-click="onClick('REG_AREA', $event, area.cdDtlNm)" >
+										<label for="a1_c{{$index}}">{{area.cdDtlNm}}</label>
+									</li>
+								</ul>
+							</dd>
+						</dl>
+						<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+							<dt class="accordionTitle btn-accordion-switch-item">용도구분 <span>{{car.carUseLabel.length > 0 ? car.carUseLabel:''}}</span></dt>
+							<dd class="accordionData">
+								<ul class="radioList">
+									<li ng-repeat="use in carUseDivCodeCommList">
+										<input type="radio" id="a2_c{{$index}}" name="a2_c" value="{{use.cdDtlNo}}" ng-model="car.carUse" ng-click="onClick('USE', $event, use.cdDtlNm)" >
+										<label for="a2_c{{$index}}">{{use.cdDtlNm}}</label>
+									</li>
+								</ul>
+							</dd>
+						</dl>
+						<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+							<dt class="accordionTitle btn-accordion-switch-item">차종구분 <span>{{car.carDivLabel.length > 0 ? car.carDivLabel:''}}</span></dt>
+							<dd class="accordionData">
+								<ul class="radioList">
+									<li ng-repeat="div in carDivCodeCommList">
+										<input type="radio" id="a3_c{{$index}}" name="a3_c" value="{{div.cdDtlNo}}" ng-model="car.carDiv" ng-click="onClick('DIV', $event, div.cdDtlNm)" >
+										<label for="a3_c{{$index}}">{{div.cdDtlNm}}</label>
+									</li>
+								</ul>
+							</dd>
+						</dl>
+						<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+							<dt class="accordionTitle btn-accordion-switch-item">상세차량구분 <span>{{car.carDetailDivLabel.length > 0 ? car.carDetailDivLabel:''}}</span></dt>
+							<dd class="accordionData">
+								<ul class="radioList">
+									<li ng-repeat="detailDiv in carDetailDivCodeCommList">
+										<input type="radio" id="a4_c{{$index}}" name="a4_c" value="{{detailDiv.cdDtlNo}}" ng-model="car.carDetailDiv" ng-click="onClick('DETAIL_DIV', $event, detailDiv.cdDtlNm)" >
+										<label for="a4_c{{$index}}">{{detailDiv.cdDtlNm}}</label>
+									</li>
+								</ul>
+							</dd>
+						</dl>
+						<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+							<dt class="accordionTitle btn-accordion-switch-item">저당비용 <span>{{car.cost.carMortgage.str.length > 0 ? car.cost.carMortgage.str:''}}</span></dt>
+							<dd class="accordionData">
+								<div class="pt12"><input type="text" name="mortgage" ng-model="car.cost.carMortgage.str" value="{{car.cost.carMortgage.str}}"/></div>
+							</dd>
+						</dl>
+						<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+							<dt class="accordionTitle btn-accordion-switch-item">등록대행료 <span>{{car.cost.carRegAgency.str.length > 0 ? car.cost.carRegAgency.str:''}}</span></dt>
+							<dd class="accordionData">
+								<div class="pt12"><input type="text" name="regAgency" ng-model="car.cost.carRegAgency.str" value="{{car.cost.carRegAgency.str}}"/></div>
+							</dd>
+						</dl>
+						<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+							<dt class="accordionTitle btn-accordion-switch-item">관리비용 <span>{{car.cost.carManageCost.str.length > 0 ? car.cost.carManageCost.str:''}}</span></dt>
+							<dd class="accordionData">
+								<div class="pt12"><input type="text" name="manageCost" ng-model="car.cost.carManageCost.str" value="{{car.cost.carManageCost.str}}"/></div>
+							</dd>
+						</dl>
+						<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+							<dt class="accordionTitle btn-accordion-switch-item">인지대 <span>{{car.cost.carRecognition.str.length > 0 ? car.cost.carRecognition.str:''}}</span></dt>
+							<dd class="accordionData">
+								<div class="pt12"><input type="text" name="recognition" ng-model="car.cost.carRecognition.str" value="{{car.cost.carRecognition.str}}"/></div>
+							</dd>
+						</dl>
+						<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+							<dt class="accordionTitle btn-accordion-switch-item">증지대 <span>{{car.cost.carStampCost.str.length > 0 ? car.cost.carStampCost.str:''}}</span></dt>
+							<dd class="accordionData">
+								<div class="pt12"><input type="text" name="stampCost" ng-model="car.cost.carStampCost.str" value="{{car.cost.carStampCost.str}}"/></div>
+							</dd>
+						</dl>
+						<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+							<dt class="accordionTitle btn-accordion-switch-item line">번호판교체비용 <span>{{car.cost.carNumberCost.str.length > 0 ? car.cost.carNumberCost.str:''}}</span></dt>
+							<dd class="accordionData">
+								<div class="pt12"><input type="text" name="numberCost" ng-model="car.cost.carNumberCost.str" value="{{car.cost.carNumberCost.str}}"/></div>
+							</dd>
+						</dl>
+					</div>
+					<div class="btnSet pd11">
+						<span><a href="" class="redLine" ng-click="init()" >초기화</a></span>
+						<span><a href="" class="red" ng-click="costClick()">계산하기</a></span>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<!-- //비용계산기 -->

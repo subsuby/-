@@ -1,0 +1,54 @@
+<!-- 메이크업등록 -->
+<div class="popupWrap makeupWriteDealer p-container bgGray" ng-init="templateInit()">
+	<!-- popup header -->
+	<div class="popupHeader">
+		<header><h1>메이크업 등록</h1></header>
+		<a class="btnClose p-close" ng-click="onClick('BTN_CLOSE')">닫기</a>
+	</div>
+	<hr/>
+	<!-- popup contents -->
+	<div class="popupContents">
+		<section>
+			<div class="myLayout getProLayout">
+				<div class="searchBar">
+					<div class="searchArea">
+						<input type="text" id="" ng-model="search.schValue" placeholder="마이카에 등록한 차량번호를 입력하세요.">
+						<label for="" class="dpn">차량번호</label>
+						<button type="button" class="" ng-click="onClick('BTN_SEARCH')">검색</button>
+					</div>
+				</div>
+				<div class="noReuslt" style="display: none;">
+					<div class="carInfo">
+						<h3>차량정보</h3>
+						<ul class="txtListType1">
+							<li><strong>차량번호</strong>{{carPlateNum | isEmpty}}</li>
+							<li><strong>배기량</strong>{{'' | isEmpty}}</li>
+							<li><strong>연식</strong>{{carRegDt | isEmpty}}</li>
+							<li><strong>색상</strong>{{carColor | isEmpty}}</li>
+							<li><strong>주행거리</strong>{{useKm | number | suffix:'km'}}</li>
+							<li><strong>제시번호</strong>{{carRegDay | isEmpty }}</li>
+							<li><strong>변속기</strong>{{carMission | isEmpty}}</li>
+							<li><strong>압류/저당</strong>{{attachCnt | isEmpty}} / {{mortGageCnt | isEmpty}}</li>
+							<li><strong>연료</strong>{{carFuel | isEmpty}}</li>
+							<li><strong>세금미납</strong>{{unpaidTax | isEmpty}}</li>
+						</ul>
+					</div>
+					<h3>요청 서비스</h3>
+					<div class="checkGroup">
+						<span class="checkSet" ng-repeat="opts in makeupTypeCodeList">
+							<input type="checkbox" id="makeup_d_{{opts.cdDtlNo}}" value="{{opts.cdDtlNo}}" name="a"  ng-checked="true" disabled/>
+							<label for="makeup_d_{{opts.cdDtlNo}}">{{opts.cdDtlNm}}</label>
+						</span>
+					</div>
+					<h3>기타 요청사항</h3>
+					<textarea cols="10" rows="5" class="txtArea" name="reqRemark" ng-model="formData.req" placeholder="방문전 휴대폰으로 전화 부탁드립니다."></textarea>
+					<div class="btnSet">
+						<span><a href="" class="redLine p-close" ng-click="onClick('BTN_CLOSE')">취소</a></span>
+						<span><button type="button" class="red" ng-click="onClick('BTN_REGIST')">저장</button></span>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+<!-- // 메이크업등록 -->

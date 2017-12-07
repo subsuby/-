@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>BNK오토모아</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+		<link rel="stylesheet" href="download/css/download.css">
+		<script>
+			var mobileKeyWords = new Array('iPhone', 'iPod', 'BlackBerry', 'Android', 'Windows CE', 'Windows CE;', 'LG', 'MOT', 'SAMSUNG', 'SonyEricsson', 'Mobile', 'Symbian', 'Opera Mobi', 'Opera Mini', 'IEmobile');
+			var isMobile = false;
+			for (var word in mobileKeyWords){
+				if (navigator.userAgent.match(mobileKeyWords[word]) != null){
+					isMobile = true;
+					break;
+				}
+			}
+
+			if(!isMobile){
+				window.location.href = "https://bnkautomoa.co.kr/product/index";
+			}
+
+			function getOS()
+			{
+				var device;
+				if ( navigator.userAgent.match(/iPhone|iPad|iPod/i) ) {
+					device = 'ios';
+				} else if ( navigator.userAgent.match(/Android/i) ) {
+					device = 'android';
+				} else if ( navigator.userAgent.match(/BlackBerry/i) ) {
+					device = 'blackberry';
+				} else if ( navigator.userAgent.match(/IEMobile|WPDesktop/i) ) {
+					device = 'window';
+				} else {
+					device = 'etc';
+				}
+				return device;
+			}
+			function onClick(code){
+				switch(code){
+				case 'ANDROID':
+					if(getOS() == 'etc'){
+						location.href="https://play.google.com/store/apps/details?id=com.bnk.plus";
+					}else{
+						location.href="market://details?id=com.bnk.plus";
+					}
+					break;
+				case 'IOS':
+					//TODO:
+					location.href="https://itunes.apple.com/gb/app/bnk%EC%98%A4%ED%86%A0%EB%AA%A8%EC%95%84/id1270574916?mt=8";
+					break;
+				}
+			}
+		</script>
+		<script type="text/javascript" src="chrome-extension://aadgmnobpdmgmigaicncghmmoeflnamj/ng-inspector.js"></script></head>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div id="content">
+				<div class="content1">
+					<div class="contentArea">
+						<div class="contentR">
+							<div class="phoneArea">
+								<img src="download/images/content1/m_img_phone.png" alt="스마트폰" />
+							</div>
+						</div>
+						<div class="contentL">
+							<div class="txtArea">
+								<img src="download/images/content1/pc_txt.png" alt="새로운 중고차 플랫폼 BNK 오토모아를 만나보세요. 내차가 얼마인지 궁금하다면 BNK 오토모아 서비스를 이용해보세요." class="txtPc" />
+								<img src="download/images/content1/m_txt.png"  alt="새로운 중고차 플랫폼 BNK 오토모아를 만나보세요. 내차가 얼마인지 궁금하다면 BNK 오토모아 서비스를 이용해보세요."  class="txtM" />
+							</div>
+							<div class="btnArea">
+								<a onclick="javascript:onClick('ANDROID');"><img src="download/images/btn_google.png" alt="ANDROID APP ON Google play"></a>
+								<a onclick="javascript:onClick('IOS');"><img src="download/images/btn_appstore.png" alt="Download onthe App Store"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="content2">
+					<div class="contentArea">
+						<div class="contentR">
+							<div class="txtArea">
+								<img src="download/images/content2/pc_txt.png" alt="허위매물 없는 실매물 중심. 중고차 조합전산과 연결되어 판매완료시 자동으로 매물 삭제되고 실제 판매중인 상품용 차량만을 제공합니다." class="txtPc" />
+								<img src="download/images/content2/m_txt.png"  alt="허위매물 없는 실매물 중심. 중고차 조합전산과 연결되어 판매완료시 자동으로 매물 삭제되고 실제 판매중인 상품용 차량만을 제공합니다."  class="txtM" />
+							</div>
+							<div class="iconArea"><span><img src="download/images/content2/pc_bgIcon.png" alt="스마트폰" /></span></div>
+						</div>
+						<div class="contentL">
+							<div class="phoneArea">
+								<img src="download/images/content2/pc_img_phone.png" alt="스마트폰" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="content3">
+					<div class="contentArea">
+						<div class="contentR">
+							<div class="phoneArea">
+								<img src="download/images/content3/pc_img_phone.png" alt="스마트폰" />
+							</div>
+						</div>
+						<div class="contentL">
+							<div class="txtArea">
+								<img src="download/images/content3/pc_txt.png" alt="" class="txtPc" />
+								<img src="download/images/content3/m_txt.png"  alt=""  class="txtM" />
+							</div>
+							<div class="iconArea">
+								<span><img src="download/images/content3/pc_bgIcon.png" alt="" class="iconPc" /></span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="content4">
+					<div class="contentArea">
+						<div class="contentR">
+							<div class="txtArea">
+								<img src="download/images/content4/pc_txt.png" alt="" class="txtPc" />
+								<img src="download/images/content4/m_txt.png"  alt=""  class="txtM" />
+							</div>
+							<div class="iconArea">
+								<img src="download/images/content4/pc_bgIcon.png" alt="" class="iconPc" />
+								<img src="download/images/content4/m_bgIcon.png" alt="" class="iconM" />
+							</div>
+						</div>
+						<div class="contentL">
+							<div class="phoneArea">
+								<img src="download/images/content4/pc_img_phone.png" alt="스마트폰" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="content5">
+					<div class="phoneArea">
+						<img src="download/images/content5/pc_img_phone.png" class="phonePc" alt="스마트폰" />
+						<img src="download/images/content5/m_img_phone.png" class="phoneM" alt="스마트폰" />
+					</div>
+					<div class="contentArea">
+						<div class="contentL">
+							<div class="txtArea">
+								<img src="download/images/content5/pc_txt.png" alt="" class="txtPc" />
+								<img src="download/images/content5/m_txt.png"  alt=""  class="txtM" />
+							</div>
+							<div class="iconArea">
+								<span><img src="download/images/content5/pc_bgIcon.png" alt="" class="iconPc" /></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="footer">
+				<div class="footerArea">
+					<a href="/product/index" style="color:yellow;">PC버전으로 전환하기</a><br/><br/>
+					주소지 : 08390 서울특별시 구로구 디지털로 32길 30, 1313호 |
+					주식회사 : 카플랫폼 | 대표이사 : 박인식, 박규웅 | <br/>
+					사업자번호 : 793-81-00509 | 문의번호 :  1644-6598<br/><br/>
+					<span>COPYRIGHT 2017 BNK CAPITAL CO., LTD ALL RIGHTS RESERVED</span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

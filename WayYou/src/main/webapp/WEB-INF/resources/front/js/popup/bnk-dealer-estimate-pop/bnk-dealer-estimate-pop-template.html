@@ -1,0 +1,43 @@
+<!--
+	* 딜러견적 상세 팝업
+	* hk-lee
+ -->
+<div class="popupWrap estimatePop p-container" ng-init="templateInit()">
+	<!-- popup header -->
+	<div class="popupHeader">
+		<header><h1>{{oParams.estDealerNm}} 딜러견적</h1></header>
+		<a class="btnClose p-close" ng-click="onClick('BTN_CLOSE')">닫기</a>
+	</div>
+	<hr/>
+	<!-- popup contents -->
+	<div class="popupContents">
+		<section>
+			<div class="innerLayout mrn">
+				<ul class="infoList">
+					<li>
+						<span><strong>딜러이름</strong><em>{{oParams.estDealerNm}}</em></span>
+					</li>
+					<li>
+						<span><strong>견적가격</strong><em>{{oParams.estAmt|number:'0'}}만원</em></span>
+					</li>
+					<li>
+						<span><strong>상사 명</strong><em>{{oParams.estShopNm}}</em></span>
+					</li>
+					<li class="long">
+						<span><strong>상사 주소</strong><em>{{oParams.estShopAddr}}</em></span>
+					</li>
+					<li class="contract"> <!-- 2017-07-12 클래스명 by hr-park -->
+						<span><strong>연락처</strong><em><a href="tel:{{oParams.estDealerTel}}">{{oParams.estDealerTel | phoneHyphen}}</a></em></span>
+					</li>
+					<li class="long">
+						<span><strong>비고</strong><em>{{oParams.estRemark}}</em></span>
+					</li>
+				</ul>
+			</div>
+			<div class="btnSet pt12">
+				<span class="p-close"><button type="button" class="redLine" ng-click="onClick('BTN_CLOSE')">닫기</button></span>
+			</div>
+		</section>
+	</div>
+</div>
+<!-- //딜러견적 -->

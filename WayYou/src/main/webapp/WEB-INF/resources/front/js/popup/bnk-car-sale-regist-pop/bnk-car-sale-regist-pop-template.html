@@ -1,0 +1,474 @@
+<style>
+.radioList input[type="checkbox"] {position:absolute;display:inline-block;opacity:0;width:100%;height:17px;}
+.radioList input[type="checkbox"]:checked + label {color:#fff;background:#e24e4e;}
+.radioList input[type="checkbox"]:disabled + label {background:#f0f0f0;}
+</style>
+<div class="popupWrap mycarRegist p-container" style="z-index: 1000; top: 0%; display: none;" ng-init="templateInit()">
+	<!-- popup header -->
+	<div class="popupHeader" style="top: 0px; position: fixed;">
+		<header><h1>{{title | getTitle}}</h1></header>
+		<a class="btnClose" onclick="return false;" ng-click="closeRegi()">닫기</a>
+	</div>
+	<hr>
+	<!-- popup contents -->
+	<div class="popupContents" style="position: absolute; top: 0%; height: 852px; padding-top: 51px;">
+		<section>
+			<!-- 2017-07-26 -->
+			<div ng-if="title.length > 0" class="priceBefore">
+				<div>
+					<strong>내차 견적을 받아보세요.</strong>
+					간단한 차량정보를 입력하면<br/>
+					내차 견적을 받아보실 수 있습니다.
+				</div>
+			</div>
+			<!-- //2017-07-26 -->
+			<div class="btn-accordion-wrapper writeType mb10" data-toggle-on="true">
+				<!---->
+				<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.carPlateNum.length > 0}">차량번호<sup>필수항목</sup></span>
+						</strong>
+						<span class="col">
+							<span>{{car.carPlateNum.length > 0 ? car.carPlateNum:'차량번호를 입력하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">		<!-- 차량번호 -->
+						<div class="pt12">
+						  <input type="text"   name="carPlateNum" maxlength="7" ng-model="car.carPlateNum" />
+						</div>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet" id="applyDay" ng-hide="car.division == 'N' || car.division == ''" ng-click="doFocus($event)">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col w120">
+							<span class="dotToggle" ng-class="{on: car.applyDay.length > 0}">등록(제시)일자<sup>필수항목</sup></span>
+						</strong>
+						<span class="col">
+							<span>{{car.applyDay.length > 0 ? car.applyDay:'등록일자를 입력하세요  (YYYY.MM.DD)'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">		<!-- 등록일자 -->
+						<div class="pt12"><input type="text" name="applyDay" ng-model="car.applyDay" maxlength="10"/></div>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet" ng-class="{on: car.focus.makerCd}" ng-click="onToggle('ACCD_MAKER')">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.makerLabel.length > 0}">제조사<sup>필수항목</sup></span>
+						</strong>
+						<span class="col">
+							<span>{{car.makerLabel.length > 0 ? car.makerLabel : '제조사를 선택하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<ul class="radioList">		<!-- 제조사 -->
+							<li ng-repeat="(key, value) in makerList">
+								<input type="radio" id="r_a{{$index}}" name="r_a" ng-model="car.makerCd" value="{{key}}" ng-click="onClick('ACCD_MAKER', $event, value)" /><label for="r_a{{$index}}">{{value}}</label>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet" ng-class="{on: car.focus.modelCd}" ng-click="onToggle('ACCD_MODEL')">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.modelLabel.length > 0}">모델<sup>필수항목</sup></span>
+						</strong>
+						<span class="col">
+							<span>{{car.modelLabel.length > 0 ? car.modelLabel : '모델을 선택하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<ul class="radioList">		<!-- 모델명 -->
+							<li ng-repeat="(key, value) in carCodeSearchMap[car.makerCd]">
+								<input type="radio" id="r_b{{$index}}" name="r_b" ng-model="car.modelCd" value="{{key}}" ng-click="onClick('ACCD_MODEL', $event, value)"><label for="r_b{{$index}}">{{value}}</label>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet" ng-class="{on: car.focus.modelDtlCd}" ng-click="onToggle('ACCD_DTL_MODEL')">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.modelDtlLabel.length > 0}">세부모델<sup>필수항목</sup></span>
+						</strong>
+						<span class="col">
+							<span>{{car.modelDtlLabel.length > 0 ? car.modelDtlLabel : '세부모델을 선택하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<ul class="radioList">		<!-- 상세모델명 -->
+							<li ng-repeat="(key, value) in carCodeSearchMap[car.modelCd]">
+								<input type="radio" id="r_c{{$index}}" name="r_c" ng-model="car.modelDtlCd" value="{{key}}" ng-click="onClick('ACCD_DTL_MODEL', $event, value)"><label for="r_c{{$index}}">{{value}}</label>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet" ng-class="{on: car.focus.gradeCd}" ng-click="onToggle('ACCD_GRADE')">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.gradeLabel.length > 0}">등급<sup>필수항목</sup></span>
+						</strong>
+						<span class="col">
+							<span>{{car.gradeLabel.length > 0 ? car.gradeLabel : '등급을 선택하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<ul class="radioList">		<!-- 등급 -->
+							<li ng-repeat="(key, value) in carCodeSearchMap[car.modelDtlCd]">
+								<input type="radio" id="r_ee{{$index}}" name="r_ee" ng-model="car.gradeCd" value="{{key}}" ng-click="onClick('ACCD_GRADE', $event, value)"><label for="r_ee{{$index}}">{{value}}</label>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.carRegYear.length > 0}">연식<sup>필수항목</sup></span>
+						</strong>
+						<span class="col">
+							<span>{{car.carRegYear.length > 0 ? car.carRegYear : '연식을 입력하세요 (YYYY)'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">		<!-- 연식 -->
+						<div class="pt12"><input type="text" name="carRegYear" maxlength="4" ng-model="car.carRegYear"/></div>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.fuelLabel.length > 0}">연료타입<sup>필수항목</sup></span>
+						</strong>
+						<span class="col">
+							<span>{{car.fuelLabel.length > 0 ? car.fuelLabel : '연료타입을 선택하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<ul class="radioList">		<!-- 연료타입 -->
+							<li ng-repeat="fuelType in fuelTypeCodeList">
+								<input type="radio" id="r_z{{$index}}" name="carFuel" ng-model="car.carFuel" value="{{fuelType.cdDtlNo}}" ng-click="onClick('ACCD_FUEL', $event, fuelType.cdDtlNm)">
+								<label for="r_z{{$index}}">{{fuelType.cdDtlNm}}</label>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.missionLabel.length > 0}">변속기<sup>필수항목</sup></span>
+						</strong>
+						<span class="col">
+							<span>{{car.missionLabel.length > 0 ? car.missionLabel : '변속기를 선택하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData"><!-- 변속기 -->
+						<ul class="radioList">
+							<li ng-repeat="missionType in missionTypeCodeList">
+								<input type="radio" id="r_e{{$index}}" name="reee" value="{{missionType.cdDtlNo}}" ng-model="car.carMission" ng-click="onClick('ACCD_MISSION', $event, missionType.cdDtlNm)">
+								<label for="r_e{{$index}}">{{missionType.cdDtlNm}}</label>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.useKm.str.length > 0}">주행거리<sup>필수항목</sup></span>
+						</strong>
+						<span class="col">
+							<span>{{car.useKm.str.length > 0 ? car.useKm.str + ' km' : '주행거리를 입력하세요 (km)'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">		<!-- 주행거리 -->
+						<div class="pt12"><input type="text" name="useKm" ng-model="car.useKm.str"></div>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.colorLabel.length > 0}">색상<sup>필수항목</sup></span>
+						</strong>
+						<span class="col">
+							<span>{{car.colorLabel.length > 0 ? car.colorLabel : '색상을 선택하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<ul class="radioList">		<!-- 색상 -->
+							<li ng-repeat="colorType in colorTypeCodeList">
+								<input type="radio" id="r_f{{$index}}" name="carColor" ng-model="car.carColor" value="{{colorType.cdDtlNo}}" ng-click="onClick('ACCD_COLOR', $event, colorType.cdDtlNm)"/>
+								<label for="r_f{{$index}}">{{colorType.cdDtlNm}}</label>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.extLabel.length > 0}">외관상태<sup>필수항목</sup></span>
+						</strong>
+						<span class="col">
+							<span>{{car.extLabel.length > 0 ? car.extLabel : '외관상태를 선택하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<ul class="radioList">
+							<li ng-repeat="carExtStatus in carExtStatusCodeList">
+								<input type="radio" id="r_i{{$index}}" name="ri" ng-model="car.surfaceState" value="{{carExtStatus.cdDtlNo}}" ng-click="onClick('ACCD_EXTERNAL', $event, carExtStatus.cdDtlNm)"/>
+								<label for="r_i{{$index}}">{{carExtStatus.cdDtlNm}}</label>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)" ng-hide="car.division == 'N' || car.division == ''">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.saleAmt.str.length > 0}">판매가격<sup>필수항목</sup></span>
+						</strong>
+						<span class="col">
+							<span>{{car.saleAmt.str.length > 0 ? car.saleAmt.str + ' 만원' : '판매가격을 입력하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData"><!-- 판매가격 -->
+						<div class="pt12"><input type="text" name="saleAmt" ng-model="car.saleAmt.str" placeholder="(100만원 단위)"></div>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet" ng-hide="car.division == 'N' || car.division == ''" ng-click="doFocus($event)"><!-- 처리안된 컬럼 2017-05-31 -->
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col w120">
+							<span class="dotToggle" ng-class="{on: car.carCheckNo.length > 0}">성능점검번호</span>
+						</strong>
+						<span class="col">
+							<span>{{car.carCheckNo.length > 0 ? car.carCheckNo : '성능점검번호를 입력하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<div class="pt12"><input type="text" name="carCheckNo" ng-model="car.carCheckNo"></div>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet" id="carGuarRefund" ng-hide="car.division == 'N' || car.division == '' || car.premConfYn != 'Y'"><!-- 처리안된 컬럼 2017-05-31 -->
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle"
+								ng-class="{on: car.carGuarFruitlessYn === 'Y' || car.carGuarRefundYn === 'Y' || car.carGuarTermYn ==='Y'}" >보상상품</span>
+						</strong>
+						<span class="col">
+							<span>
+								<span class="markGroup">
+									<span id="mark1" ></span>
+									<span id="mark2" ></span>
+									<span id="mark3" ></span>
+								</span>
+							</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<ul class="radioList">
+							<li><input type="checkbox" id="r_aa1" ng-click="onClick('ACCD_GUAR', $event, 'r_aa1')" /><label for="r_aa1">환불보장 (잔여:{{car.guarFruitlessCntLabel > 0 ? car.guarFruitlessCntLabel+'개' : '0개 구매필요'}})</label></li>
+							<li><input type="checkbox" id="r_aa2" ng-click="onClick('ACCD_GUAR', $event, 'r_aa2')" /><label for="r_aa2">헛걸음보상 (잔여:{{car.guarRefundCntLabel > 0 ? car.guarRefundCntLabel+'개' : '0개 구매필요'}})</label></li>
+							<!-- li><input type="checkbox" id="r_aa3" ng-click="onClick('ACCD_GUAR', $event, 'r_aa3')" /><label for="r_aa3">연장보증 (잔여:{{car.guarTermCntLabel > 0 ? car.guarTermCntLabel+'개' : '0개 구매필요'}})</label></li -->
+						</ul>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)" ng-hide="car.division == 'N' || car.division == '' || car.premConfYn != 'Y'">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.carFrameNum.length > 0}">차대번호</span>
+						</strong>
+						<span class="col">
+							<span>{{car.carFrameNum.length > 0 ? car.carFrameNum:'차대번호를 입력하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">		<!-- 차대번호 -->
+						<div class="pt12"><input type="text" name="carFrameNum" maxlength="17" ng-model="car.carFrameNum" /></div>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col w120">
+							<span class="dotToggle" ng-class="{on: car.rentLabel.length > 0}">렌터카 사용이력</span>
+						</strong>
+						<span class="col">
+							<span>{{car.rentLabel.length > 0 ? car.rentLabel : '렌터카 사용이력을 선택하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData"><!-- 렌터카 사용이력 -->
+						<ul class="radioList">
+							<li ng-repeat="carRentStatus in carRentStatusCodeList">
+								<input type="radio" id="r_ff{{$index}}" name="rf" value="{{carRentStatus.cdDtlNo}}"
+								ng-model="car.rentYn" ng-click="onClick('ACCD_RENT', $event, carRentStatus.cdDtlNm)">
+								<label for="r_ff{{$index}}">{{carRentStatus.cdDtlNm}}</label>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.accLabel.length > 0}">사고내역</span>
+						</strong>
+						<span class="col">
+							<span>{{car.accLabel.length > 0 ? car.accLabel : '사고내역을 선택하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<ul class="radioList">
+							<li ng-repeat="carAccStatus in carAccStatusCodeList">
+								<input type="radio" id="r_g{{$index}}" name="rg" ng-model="car.sagoYn" value="{{carAccStatus.cdDtlNo}}" ng-click="onClick('ACCD_ACCIDENT', $event, carAccStatus.cdDtlNm)">
+								<label for="r_g{{$index}}">{{carAccStatus.cdDtlNm}}</label>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col w120">
+							<span class="dotToggle" ng-class="{on: car.unpaidTax.length > 0}">세금 등 미납내역</span>
+						</strong>
+						<span class="col">
+							<span>{{car.unpaidTax.length > 0 ? car.unpaidTax : '미납내역을 입력하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">		<!-- 미납세금정보 -->
+						<div class="pt12"><input type="text" name="unpaidTax" ng-model="car.unpaidTax"></div>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.optionCds.length > 0}">옵션</span>
+						</strong>
+						<span class="col">
+							<span>{{car.optionCds.length > 0 ? '' : '옵션을 선택하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData optionArea">
+						<strong ng-repeat-start="optionType in optionTypeCodeList">
+							<span class="checkSet">
+								<input id="opt{{$index}}" type="checkbox" ng-model="checkAll" ng-click="checkRender()"/>
+								<label for="opt{{$index}}">{{optionType.cdDtlNm}}</label>
+							</span>
+						</strong>
+						<div ng-repeat-end>
+							<span class="checkSet" ng-if="optionType.cdSubNo === option.cdNo" ng-repeat="option in optionCodeList">
+								<input type="checkbox" id="opt_c{{$index}}" value="{{option.cdDtlNo}}" ng-click="onClick('ACCD_OPTION', $event)" ng-checked="checkAll || optionChecked(option.cdDtlNo)"><label for="opt_c{{$index}}">{{option.cdDtlNm}}</label>
+							</span>
+						</div>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.carDesc.length > 0}">상세설명</span>
+						</strong>
+						<span class="col">
+							<span>{{car.carDesc.length > 0 ? car.carDesc : '입력창에 상세설명을 입력하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+					<div class="pt12">			<!-- 차량 설명 -->
+						<textarea cols="10" rows="5" name="carDesc" ng-model="car.carDesc"
+						placeholder="사고부위 설명, 수리 필요사항, 추가옵션 등 차량에 대한 자세한 설명을 작성해주세요.
+*사실과 다른 내용 입력시 가격 조정이 있을 수 있습니다."></textarea>
+						</div>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: files.indexs.length > 1}">사진등록</span>
+						</strong>
+						<span class="col">
+							<span>{{files.indexs.length > 0 ? '' : '사진을 등록하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<div class="mycarImage">
+							<div class="">
+								<ul class="">
+									<li class="" ng-repeat="index in files.indexs">
+										<div class="imageUp">
+											<span class="imgFileDelete" ng-show="files.exists[$index]===index"><input style="button" value="삭제하기" ng-click="remove($index)"></span>
+											<span class="imgFileUp" ng-show="files.exists[$index]!==index">
+												<label>추가하기</label>
+												<input type="file" ngf-select="upload($files, index)">
+											</span>
+											<div><strong><img ng-if="files.srcs[index]" ng-src="{{files.srcs[index]}}"/></strong></div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet" ng-click="doFocus($event)">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.carVideoUrl.length > 0}">동영상등록</span>
+						</strong>
+						<span class="col">
+							<span>{{car.carVideoUrl.length > 0 ? car.carVideoUrl : '입력창에 URL을 입력하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<div class="pt12"><input type="text" ng-model="car.carVideoUrl"></div>
+					</dd>
+				</dl>
+				<!---->
+				<dl class="btn-accordion-switch accordionSet">
+					<dt class="accordionTitle btn-accordion-switch-item">
+						<strong class="col">
+							<span class="dotToggle" ng-class="{on: car.parkZip.length > 0}">주차위치</span>
+						</strong>
+						<span class="col">
+							<span>{{car.parkZip.length > 0 ? car.parkAddr1 : '주차위치를 입력하세요'}}</span>
+						</span>
+					</dt>
+					<dd class="accordionData">
+						<div class="pt12">
+							<div class="btnType">
+								<input id="parkZip" ng-model="car.parkZip" type="text" placeholder="우편번호" class="readonly" readonly="">
+								<label for="parkZip" class="dpn">우편번호</label>
+								<button type="button" ng-click="onClick('BTN_ADDR_CHANGE')">변경</button>
+							</div>
+							<div class="readtxt">
+								<input id="parkAddr1" ng-model="car.parkAddr1" type="text" placeholder="주소"  class="readonly" readonly="">
+								<label for="parkAddr1" class="dpn">주소</label>
+							</div>
+							<div class="readtxt lastRow">
+								<input id="parkAddr2" ng-model="car.parkAddr2" type="text" placeholder="상세주소"  class="readonly" readonly="">
+								<label for="parkAddr2" class="dpn">상세주소</label>
+							</div>
+						</div>
+					</dd>
+				</dl>
+				<!---->
+			</div>
+			<div class="btnSet pt12">
+				<span><button class="btnCancel redLine" ng-click="onClick('BTN_CANCEL')">취소</button></span>
+				<span><button class="red" ng-click="regist(form)">저장</button></span>
+			</div>
+		</section>
+	</div>
+</div>
+<div><address-search-pop	params="{}"			on-confirm-callback="onConfirm(data)" /></div>

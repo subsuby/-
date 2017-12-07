@@ -1,0 +1,40 @@
+<div class="popupWrap groupFind  p-container bgGray" id="dealerGroupSearchPop" ng-init="templateInit()">
+    <!-- popup header -->
+    <div class="popupHeader" style="top: 100%; position: fixed;">
+        <header><h1>소속단체 찾기</h1></header>
+        <a class="btnClose p-close">닫기</a>
+    </div>
+    <hr>
+    <!-- popup contents -->
+    <div class="popupContents" style="position: absolute; top: 100%; height: 685px; padding-top: 51px;">
+        <section>
+            <div class="findAddress">
+                <div class="searchArea">
+                    <input type="text" name="danjiFullNm" ng-model="danjiFullNm" placeholder="소속 단체를 입력하세요.">
+                    <label for="" class="dpn">소속 단체</label>
+                    <button type="button" class="" ng-click="searchGrp();">검색</button>
+                </div>
+
+                <h2>검색결과</h2>
+                <!-- 검색목록이 없을 시 -->
+                <div class="addressList" style="display: none;">
+                    <p>검색어를 입력하세요</p>
+                </div>
+                <!-- //검색목록이 없을 시 -->
+                <div class="findList">
+                    <ul ng-show="carGroupList.length != 0"><!--  ng-show="carGroupList.length != 0" -->
+                        <li ng-repeat="item in carGroupList" ng-model="danjiNo" value="{{item.danjiNo}}" ng-click="select($index)" ng-class="{on: item === selectedData}">{{item.danjiFullName}}</li>
+                    </ul>
+                    <ul ng-show ="carGroupList.length == 0"><!--  ng-show ="carGroupList.length == 0" -->
+                        <li style="text-align: center;">검색결과가 없습니다.</li>
+                    </ul>
+                    <input type="hidden" id="hidIdG" ng-model="hidIdG" value=""></input>
+                </div>
+                <div class="btnSet">
+                    <span><a href="" class="redLine p-close">취소</a></span>
+                    <span><a href="" class="red" ng-click="onComplete()">다음</a></span>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

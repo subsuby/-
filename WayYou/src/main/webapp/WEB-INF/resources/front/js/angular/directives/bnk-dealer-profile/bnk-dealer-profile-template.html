@@ -1,0 +1,59 @@
+<!--
+	* BNK딜러 프로필
+	* hk-lee
+-->
+<div class="dataSet dealerArea smalltype" ng-init="templateInit()">
+	<h2 class="dpn">판매자정보</h2>
+	<div class="dataItem">
+		<span class="heartSet">
+			<input type="checkbox" ng-if="sessUserInfo.division == -1" id="h_2" ng-checked="user.dealerInterestYn == 'Y'" ng-click="onClick('INST_DEALER')" onClick="return false;">
+			<input type="checkbox" ng-if="sessUserInfo.division == 'N' || sessUserInfo.division == 'D'" id="h_2" ng-checked="user.dealerInterestYn == 'Y'" ng-click="onClick('INST_DEALER')">
+			<label for="h_2"><!--찜하기--></label>
+		</span>
+		<div class="dealerProfile">
+			<div class="fixWidth">
+				<span class="thumProfile">
+					<img src="/m/front/images/thumbnail/profile2.png" alt="">
+				</span>
+			</div>
+			<div class="autoWidth">
+				<span class="levelBadge level{{user.gradeDealer}}"><span><strong>{{user.userName}}</strong> 딜러</span></span><br>
+				<div>{{user.phoneMobile | phoneHyphen}}</div>
+				<p>
+					<span>{{shopCodeInfoMap[user.shopNo].danjifullname}}</span>
+					<strong>{{shopCodeInfoMap[user.shopNo].danjicity}}</strong><br>
+					<span ng-click="onClick('BTN_SELLER_INFO_LIST')">판매중 <em>{{user.saleCarCnt}}</em>대</span>
+					<strong>누적판매 {{user.saleCnt}}대</strong>
+				</p>
+			</div>
+		</div>
+		<div class="dealerRating">
+			<span>종합 거래평가</span>
+			<div id="profileRateit" class="rating" data-rateit-readonly="true" data-rateit-value="0" ></div>
+			<strong>{{user.evalAvg | number:'1'}}</strong>
+		</div>
+		<!---->
+		<div class="dealerAfter">
+			<div class="btn-accordion-wrapper" data-toggle-on="true">
+				<ul>
+					<li class="btn-accordion-switch" ng-repeat="eval in user.dealerEvalList" ng-if="$index < 3">
+						<div class="afterTit">
+							<div class="btn-accordion-switch-item">
+								<strong>{{eval.evalDivLabel}}</strong>
+								<div>{{eval.reviews}}</div>
+								<span>{{eval.createdDate | dateFormat8}}</span>
+							</div>
+						</div>
+						<div class="afterDetail">
+							{{eval.reviews}}
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!---->
+		<div class="btnSet">
+			<span ng-click="onClick('BTN_SELLER_INFO')"><a class="redLine viewCase"><em><strong>판매자정보</strong> 더보기</em></a></span>
+		</div>
+	</div>
+</div>

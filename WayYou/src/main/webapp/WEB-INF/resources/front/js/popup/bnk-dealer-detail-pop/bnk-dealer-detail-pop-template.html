@@ -1,0 +1,141 @@
+<!--
+	* 딜러프로필 상세
+	* hk-lee
+ -->
+
+<div id="dealerDetailPop" class="dealerDetail popupWrap" ng-init="templateInit()">
+	<!-- popup header -->
+	<div class="popupHeader">
+		<header><h1>딜러프로필</h1></header>
+		<a class="btnClose p-close">닫기</a>
+	</div>
+	<hr/>
+	<!---->
+	<div class="popupContents">
+		<div class="dealerArea">
+			<span class="heartSet">
+				<input type="checkbox" ng-if="sessUserInfo.division == -1"  ng-checked="oParams.user.dealerInterestYn == 'Y'" id="hd_2" ng-click="onClick('INST_DEALER')" onclick="return false;">
+				<input type="checkbox" ng-if="sessUserInfo.division == 'N' || sessUserInfo.division == 'D'" ng-checked="oParams.user.dealerInterestYn == 'Y'" ng-click="onClick('INST_DEALER')" id="hd_2">
+				<label for="hd_2"><!--찜하기--></label>
+			</span>
+			<span class="thumProfile">
+				<img src="/m/front/images/thumbnail/profile2.png" alt="">
+			</span>
+			<div>
+				<span class="levelBadge level{{oParams.user.gradeDealer}}"><span><strong>{{oParams.user.userName}}</strong> 딜러</span></span><br>
+				<p>“정직과 신용으로 최선을 다하겠습니다.”</p>
+			</div>
+		</div>
+		<!---->
+		<div class="btn-toggle-wrapper">
+			<div class="btnTab case1 grid3">
+				<a href="" onclick="return false;" class="btn-toggle-switch on"><span>딜러정보</span></a>
+				<a href="" onclick="return false;" class="btn-toggle-switch"><span>거래평가</span></a>
+				<a href="" onclick="return false;" class="btn-toggle-switch"><span>판매차량<em>{{oPageInfo.totListSize | number}}</em></span></a>
+			</div>
+			<div class="btn-toggle-switch-target">
+				<div class="infoArea">
+					<dl>
+						<dt>연락처</dt>
+						<dd>{{oParams.user.phoneMobile | phoneHyphen}}</dd>
+					</dl>
+					<dl>
+						<dt>회원가입일</dt>
+						<dd>{{oParams.user.createdDate}}</dd>
+					</dl>
+					<dl>
+						<dt>딜러매물</dt>
+						<dd><span ng-click="onClick('MOVE_TAB', 2)">판매중 {{oPageInfo.totListSize | number}} 대</span> | 판매완료 {{oParams.user.saleCnt}}대</dd>
+					</dl>
+					<dl>
+						<dt>종사자번호</dt>
+						<dd>{{oParams.user.dealerLicenseNo}}</dd>
+					</dl>
+					<dl>
+						<dt>지역/상사</dt>
+						<dd>{{shopCodeInfoMap[oParams.user.shopNo].danjisido}}
+							{{shopCodeInfoMap[oParams.user.shopNo].danjicity}}
+							{{shopCodeInfoMap[oParams.user.shopNo].danjifullname}}
+						</dd>
+					</dl>
+				</div>
+				<div><div id="map" style="width:100%;height:178px;"></div></div>
+			</div>
+			<div class="btn-toggle-switch-target" style="display:none;" >
+				<div class="ratingArea">
+					<div class="dealerRating">
+						<span>종합 거래평가</span><div id="infoRating" class="rating rateit" data-rateit-readonly="true"></div>
+						<strong>{{oParams.user.evalAvg | number:'1'}}</strong>
+					</div>
+					<div class="btnSet">
+						<span><a class="redLine rankWrite" ng-click="onClick('BTN_RATING_ADD')"><em><strong>평가작성</strong>하기</em></a></span>
+					</div>
+					<!---->
+					<div class="dealerAfter">
+						<div class="btn-accordion-wrapper" data-toggle-on="true">
+							<ul>
+								<li class="btn-accordion-switch" ng-repeat="eval in param.dealerEvalList" ng-init="$last && setupAccordion()">
+									<div class="afterTit">
+										<div class="btn-accordion-switch-item">
+											<strong>{{eval.evalDivLabel}}</strong>
+											<div>{{eval.reviews}}</div>
+											<span>{{eval.createdDate | dateFormat8}}</span>
+										</div>
+									</div>
+									<div class="afterDetail">
+										{{eval.reviews}}
+									</div>
+								</li>
+							</ul>
+						</div>
+						<!---->
+						<div class="btnMore">
+							<button type="button" ng-show="param.dealerEvalList.length > 0 && param.curPage < param.totPage + 1" ng-click="onClick('LIST_MORE')"><strong>거래평</strong> 더보기 +</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="btn-toggle-switch-target" style="display:none;">
+				<ul class="listType1 grid2">
+					<!-- Loop -->
+					<li ng-repeat="car in carList">
+<!-- 						<a href="/front/category/mycar/buyDetail/{{car.carSeq}}"> -->
+							<a href='javascript:;' ng-click="goDetail(car.carSeq)">
+
+							<div class="thumBack">
+								<span class="markSet mark1" ng-show="car.bnkConfYn == 'Y'">인증</span>
+								<span class="bookingCount" ng-show="car.resCnt > 0">예약 <strong>{{car.resCnt}}</strong>건</span>
+								<span class="saleCar">
+									<span class="imgBack"><strong><img check-img ng-src="{{car.itemImgInfo.mThumbPath}}" ng-model="car" alt="{{car.label.makerName}}{{car.label.modelDtlName}}" /></strong></span>
+									<img src="<c:url value="/product/images/thumbnail/listCarCorver.png"/>" alt="" class="corver" />
+								</span>
+								<!-- <div>
+									<img check-img ng-src="{{car.itemImgInfo.mThumbPath}}" ng-model="car" alt="{{car.label.makerName}}{{car.label.modelDtlName}}" />
+								</div> -->
+							</div>
+							<div class="prBack">
+								<div class="productInfo">
+									<div><strong>{{car.label.makerName}}</strong><span>{{car.label.modelDtlName}}</span><span>{{car.label.gradeName}}</span></div>
+									<p><span>{{car.label.carRegYear | isEmpty}}</span><em>{{car.carArea}}</em><em>{{car.label.useKm | number | suffix:'km'}}</em></p>
+									<strong class="goodsPrice"><strong>{{car.saleAmt | number}}</strong>만원</strong>
+								</div>
+								<span class="markGroup">
+									<span class="markSet mark2" ng-show="car.carGuarRefundYn == 'Y'">환불</span>
+									<span class="markSet mark3" ng-show="car.carGuarFruitlessYn == 'Y'">헛걸음</span>
+									<span class="markSet mark4" ng-show="car.carGuarTermYn == 'Y'">1년보증</span>
+								</span>
+							</div>
+						</a>
+						<span class="heartSet">
+							<input ng-if="sessUserInfo.division == -1" type="checkbox" id="hhhhh_1{{$index}}" ng-click="onClick('DIBS_ON',car)" ng-checked="car.dibsYn === 'Y'" onClick="return false;"/>
+							<input ng-if="sessUserInfo.division == 'N' || sessUserInfo.division == 'D'" type="checkbox" id="hhhhh_1{{$index}}" ng-checked="car.dibsYn === 'Y'" ng-click="onClick('DIBS_ON',car)"/>
+							<label for="hhhhh_1{{$index}}"><!--찜하기--></label>
+						</span>
+					</li>
+					<!-- //Loop -->
+				</ul>
+				<!-- <div style="width:100%" class="bnk_loading more" ng-hide="oPageInfo.bHasMore == false || bShowEmpty == true"></div> -->
+			</div>
+		</div>
+	</div>
+</div>

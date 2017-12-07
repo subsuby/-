@@ -1,0 +1,23 @@
+<div class="popupWrap popWrapQWrite p-container" id="qna_write_pop" ng-init="templateInit()">
+<!-- popup header -->
+	<form name="form">
+	<div class="popupHeader">
+		<header><h1>문의작성</h1></header>
+		<a class="btnClose p-close" onclick="return false;">닫기</a>
+	</div>
+	<hr/>
+	<!-- popup contents -->
+	<div class="popupContents">
+		<section>
+			<div class="quesLayout">
+				<input type="text" placeholder="제목을 입력하세요." id="qnaTitle" ng-model="formData.qnaTitle"/>
+				<label class="dpn">제목</label>
+				<textarea cols="10" rows="5" placeholder="내용을 입력하세요." id="qnaContent" ng-model="formData.contents"></textarea>
+				<div class="btnSet btnEnroll">
+					<span><button class="btnRegist red" ng-click="regist(form)">등록하기</button></span>
+				</div> 
+			</div>
+		</section>
+	</div>
+	</form>
+</div>

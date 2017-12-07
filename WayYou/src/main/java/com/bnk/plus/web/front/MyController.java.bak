@@ -1,0 +1,241 @@
+package com.bnk.plus.web.front;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.bnk.plus.commons.components.CoTopComponent;
+import com.bnk.plus.entity.Car;
+import com.bnk.plus.entity.My;
+import com.bnk.plus.entity.T2File;
+import com.bnk.plus.service.api.FileService;
+import com.bnk.plus.service.my.service.MyService;
+
+@Controller
+@RequestMapping(value = {"/front/my"})
+public class MyController extends CoTopComponent {
+	
+	private final String tilesPrefix = "tiles.front.my.";
+	
+	@Autowired
+	MyService myService;
+	@Autowired
+	FileService fileService;
+	
+	//문의내역관리 - 일반
+	@RequestMapping(value={"/qnaList"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String qna_list(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load qna_list Page.");
+		
+		return tilesPrefix+"qna_list";
+	}
+	
+	//문의내역 리스트
+	@RequestMapping(value={"/qnaList/ajax"}, method = RequestMethod.POST, produces = "text/html; charset=utf-8")
+	public @ResponseBody ResponseEntity<Object> qna_list_Ajax(@RequestBody My my, HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load qna_list Page.");
+		
+		Map<String, Object> resMap = new HashMap<>();
+		String resCd = "00";
+		
+		try{
+			resMap = myService.getQnaList(my);
+		}catch (Exception e) {
+			resCd = "99";
+		}
+
+		resMap.put("resCd", resCd);
+		return makeJsonResponseHeader(resMap);
+	}
+	
+	//문의 등록
+	@RequestMapping(value={"/qnaList/regist"}, method = RequestMethod.POST, produces = "text/html; charset=utf-8")
+	public @ResponseBody ResponseEntity<Object> questionSaveAjax(My my, HttpServletRequest req, HttpServletResponse res, Model model){
+		log_usual.debug(" :: Start qnaSaveAjax");
+		HashMap<String, Object> resMap  = new HashMap<>();
+		String resCd = "00";
+		
+		try {
+			myService.registFrontQuestion(my);
+		} catch (Exception e) {
+			resCd = "99";
+		}
+
+		resMap.put("resCd", resCd);
+		return makeJsonResponseHeader(resMap);
+	}
+	
+	//명함 관리 - 일반
+	@RequestMapping(value={"/businesscardManagement"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String businesscard_management(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load businesscard_management Page.");
+		
+		return tilesPrefix+"businesscard_management";
+	}
+	//체크리스트 - 일반
+	@RequestMapping(value={"/checkList"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String check_list(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load check_list Page.");
+		
+		return tilesPrefix+"check_list";
+	}
+	// 관심차량 - 일반
+	@RequestMapping(value={"/interestCar"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String interestCar(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load interest_car Page.");
+		
+		return tilesPrefix+"interest_car";
+	}
+	
+	// 관심차량 리스트 가져오기
+	@RequestMapping(value={"/interestCar/ajax"}, method = RequestMethod.POST)
+	public @ResponseBody ResponseEntity<Object> interestCarListAjax(@RequestBody Car car, HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Start interestCarListAjax");
+
+		
+		Map<String, Object> resMap = new HashMap<>();
+		String resCd = "00";
+
+		try {
+			resMap = myService.getInterestCarList(car);
+		} catch (Exception e) {
+			resCd = "99";
+			e.printStackTrace();
+		}
+		
+		resMap.put("resCd", resCd);
+		return makeJsonResponseHeader(resMap);
+	}
+	
+	// 관심딜러 - 일반
+	@RequestMapping(value={"/interestDealer"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String interest_dealer(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load interest_dealer Page.");
+		
+		return tilesPrefix+"interest_dealer";
+	}
+	// 메이크업 - 일반
+	@RequestMapping(value={"/makeup"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String makeup(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load makeup Page.");
+		
+		return tilesPrefix+"makeup";
+	}
+	//마이카 - 일반
+	@RequestMapping(value={"/mycar"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String mycar(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load mycar Page.");
+		return tilesPrefix+"mycar";
+	}
+	//마이카 - 등록
+	@RequestMapping(value={"/mycar/regist"}, method = RequestMethod.POST, produces = "text/html; charset=utf-8")
+	public @ResponseBody ResponseEntity<Object> mycarRegist(Car car, HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load mycar Page.");
+		myService.registCarModel(car);
+		
+		return makeJsonResponseHeader(car);
+	}
+	//마이카 - 파일업로드등록
+	@RequestMapping(value={"/mycar/fileUpload"}, method = RequestMethod.POST, produces = "text/html; charset=utf-8")
+	public @ResponseBody ResponseEntity<Object> mycarFileUpload(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load mycar Page.");
+		T2File file = null;
+		try {
+			file = fileService.fileUploadEx(req);
+		} catch (IOException e) {
+		}
+		return makeJsonResponseHeader(file);
+	}
+	//방문 시승 탕송 예약 - 일반
+	@RequestMapping(value={"/reserList"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String reser_list(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load reser_list Page.");
+		
+		return tilesPrefix+"reser_list";
+	}
+	//내게맞는매물 - 일반
+	@RequestMapping(value={"/reverseAuction"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String reverse_auction(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load reverse_auction Page.");
+		
+		return tilesPrefix+"reverse_auction";
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	//마이카 - 딜러
+	@RequestMapping(value={"/mycarDealer"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String mycar_dealer(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load mycar_dealer Page.");
+		
+		return tilesPrefix+"mycar_dealer";
+	}
+	//방문 시승 탁송 사전예약관리 - 딜러
+	@RequestMapping(value={"/reserListDealer"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String reser_list_dealer(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load reser_list_dealer Page.");
+		
+		return tilesPrefix+"mycar";
+	}
+	//명함발송관리 - 딜러
+	@RequestMapping(value={"/businesscard"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String my_businesscard(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load businesscard Page.");
+		
+		return tilesPrefix+"businesscard";
+	}
+	//관심차량 - 딜러
+	@RequestMapping(value={"/interestCarDealer"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String interestCarDealer(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load interest_car_dealer Page.");
+		
+		return tilesPrefix+"interest_car_dealer";
+	}
+	//견적발송관리 - 딜러
+	@RequestMapping(value={"/sendQuotation"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String send_quotation(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load send_quotation Page.");
+		
+		return tilesPrefix+"send_quotation";
+	}
+	//메이크업 - 딜러
+	@RequestMapping(value={"/makeupDealer"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String makeup_dealer(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load makeup_dealer Page.");
+		
+		return tilesPrefix+"makeup_dealer";
+	}
+	//내게맞는매물 - 딜러
+	@RequestMapping(value={"/reverseAuctionDealer"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String reverse_auction_dealer(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load reverse_auction_dealer Page.");
+		
+		return tilesPrefix+"reverse_auction_dealer";
+	}
+	//체크리스트 - 딜러
+	@RequestMapping(value={"/checkDealer"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String my_check_dealer(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load check_dealer Page.");
+		
+		return tilesPrefix+"check_dealer";
+	}
+
+	@RequestMapping(value={"/mycarNone"}, method = RequestMethod.GET, produces = "text/html; charset=utf-8")
+	public String mycar_none(HttpServletRequest req, HttpServletResponse res, Model model){
+		mlog_usual.debug(" :: Load mycar_none Page.");
+		
+		return tilesPrefix+"mycar_none";
+	}
+}

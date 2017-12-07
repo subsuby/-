@@ -1,0 +1,552 @@
+@charset "utf-8";
+
+/* =================================================================================
+* INFORMATION
+* -----------------------------------------------------------------------
+* @File Name: my.css
+* @Version: 1.0
+* @Create Date: 2017-04-04
+* @Update Date: N/A
+* @History: N/A
+* ================================================================================= */
+.myLayout {clear:both;width: 1213px; margin:0 auto;position: relative;}
+.myLayout:after{content:"";display:block;clear:both;}
+.myLayout:before {content: "";display: block;position: absolute;left;:0;top: 0;z-index: 0; width: 220px;height: 100%;background-color: #f7f7f7;}
+.myLayout .mymenu {float:left;width: 220px;position: relative;z-index: 1;}
+.myLayout .mymenu .dealerProfile {text-align: center;}
+.myLayout .mymenu .dealerProfile .profileImage {margin:30px auto 0;}
+.myLayout .mymenu .dealerProfile .dealName {display: block;font-size: 22px;}
+.myLayout .mymenu .dealerProfile .dealPoint {display: block;font-size: 16px;color: #e24e4e;}
+.myLayout .mymenu .dealerProfile .btnModify {display: block;margin:25px auto 40px;font-size: 16px;width: 132px;height: 38px;line-height: 38px;border:1px solid #4e4e4e;}
+.myLayout .mymenu .menu {border-top: 1px solid #e6e6e6;}
+.myLayout .mymenu .menu li {border-bottom: 1px solid #e6e6e6;height: 60px;line-height: 60px;padding: 0 20px;font-size: 18px;}
+.myLayout .mymenu .menu li.on {background-color: #e24e4e;}
+.myLayout .mymenu .menu li.on a {color: #fff;}
+.myLayout .mymenu .menu li:hover {background-color:#e24e4e;}
+.myLayout .mymenu .menu li:hover a {color: #fff;}
+.myLayout .mymenu .menuSmall {padding:10px 20px;}
+.myLayout .mymenu .menuSmall span {display: block;line-height: 2;}
+.myLayout .mymenu .menuSmall span a {font-size: 16px;color: #969696;}
+.myLayout .mymenu .menuSmall span.on a {color: #e24e4e;}
+.myLayout .mymenu .menuSmall span:hover a {color: #e24e4e;}
+.myLayout .container {float:right;width:973px; padding-left:20px;padding-bottom: 90px;}
+.myLayout .container .infoTxt {font-size: 16px;padding:18px 20px;}
+.myLayout .container .infoTxt i {font-size: 20px;font-weight: bold;color: #e24e4e;}
+.myLayout .container .titBar {padding:20px 20px 0 10px;border-bottom: none;}
+.myLayout .container .titBar h2 {font-size: 22px;}
+.myLayout .container .titBar.noline:before {display: none;}
+.myLayout .container .allSituation {height:138px;border:1px solid #e6e6e6;background-color: #f8f8f8;margin-bottom: 60px;}
+.myLayout .container .allSituation span {float:left;display: block;line-height: 1;text-align: center;}
+.myLayout .container .allSituation span:first-child {width: 746px;height:138px;padding:19px 0;background-color: #fff;border-right:1px solid #e6e6e6;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.myLayout .container .allSituation span:last-child {width: 224px;}
+.myLayout .container .allSituation span em {display: inline-block;width:33%;height: 100px; text-align: center;font-size: 14px;text-align: center;position: relative;}
+.myLayout .container .allSituation span em:after {content: "";display: block;position: absolute;right:0;top:0; width: 1px;height: 100px;background-color: #e6e6e6}
+.myLayout .container .allSituation span em:last-child:after {display: none;}
+.myLayout .container .allSituation span em i {display: block;font-size: 40px;margin:22px 0 5px;}
+.myLayout .container .allSituation span em.new:before {content: "NEW";display: block;position: absolute;left:0;top: 5px; font-size: 10px;width: 100%; color: #e24e4e;text-align: center;}
+.myLayout .container .allSituation span em.new i {color: #e24e4e;}
+.myLayout .container .allSituation span strong {display: block;width: 100%;text-align: center;font-size: 16px;margin: 32px 0 12px;}
+.myLayout .container .allSituation:after{content:"";display:block;clear:both;}
+.myLayout .container .defaultWrap {border:2px solid #999;width: 100%;height: 700px;background-color: #e6e6e6;margin-top: 50px; -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+/**/
+.myLayout .btnTab {clear:left;display:table;height:56px;text-align:center;position: relative;margin-bottom: 20px;}
+.myLayout .btnTab:after {content: "";display: block;position: absolute;left:0;bottom:0; width: 100%;height: 2px;background-color: #e24e4e;}
+.myLayout .btnTab a {display:table-cell;font-size:18px;font-weight:bold;width:150px;height:56px;}
+.myLayout .btnTab a span {display:block;border-bottom:2px solid #e24e4e;color: #fff;font-size: 18px;height:58px;line-height:58px;overflow:hidden;background-color: #d8d8d8;position:relative;}
+.myLayout .btnTab a span:after {content: "";display: block;position: absolute;left:0;top: 0; width: 1px;height: 58px;background-color: #fff;}
+.myLayout .btnTab a:nth-child(2) span {border-left:none;}
+.myLayout .btnTab a.on span {position:absolute;z-index:2;height:58px;width:100%;color:#e24e4e;border:2px solid #e24e4e;border-bottom:none;background-color: #fff;} 
+.myLayout .btnTab button {display: block;position: absolute;right:0;top: 0;width: 148px;height: 47px;line-height: 47px;border:1px solid #e24e4e;text-align: center;font-size: 16px;color: #e24e4e;}
+.myLayout .btnTab button.enrollment:before {content: "";display: inline-block;margin:-4px 5px 0 0;width: 18px;height: 18px;vertical-align: middle;background: url('../images/common/bg_icon.png') no-repeat -310px -153px;}
+.myLayout .btnTab button.choiceEnrollment:before {content: "";display: inline-block;margin:0 5px 0 0;width: 18px;height: 18px;vertical-align: middle;background: url('../images/common/choice_enrollment.png') no-repeat;}
+.myLayout .btnTab button.accept:before {content: "";display: inline-block;margin:-4px 5px 0 0;width: 18px;height: 18px;vertical-align: middle;background: url('../images/common/bg_icon.png') no-repeat -164px -132px;}
+.myLayout .btnTab button.refuse:before {content: "";display: inline-block;margin:0 5px 0 0;width: 18px;height: 18px;vertical-align: middle;background: url('../images/common/btn_delete_red.png') no-repeat;}
+/**/
+.searchBox {background-color: #f8f8f8;border:1px solid #e6e6e6;margin-bottom: 40px;padding:20px;}
+.searchBox .box {display: block;padding-right:180px;position: relative;}
+.searchBox .box:first-child {margin-bottom: 20px;}
+.searchBox .box button {display: block;position: absolute;right:0;top: 0;width: 100px;height: 40px;line-height: 40px;font-size: 18px;text-align: center;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.searchBox .box button.btnInit {border:1px solid #4e4e4e;/*background-color: #fff;*/}
+.searchBox .box button.btnInit:before {content: "";display: inline-block;width: 16px;height: 17px;margin-right: 5px; background: url('../images/common/bg_icon.png') no-repeat -310px -110px;}
+.searchBox .box button.btnSearch {background-color: #e24e4e;color: #fff;}
+.searchBox .box button.btnSearch:before {content: "";display: inline-block;width: 18px;height: 18px;margin:-2px 5px 0 0; background: url('../images/common/bg_icon.png') no-repeat -310px -130px;vertical-align: middle;}
+.searchBox .box strong {display: inline-block;width: 68px;vertical-align: middle;font-size: 18px;}
+.searchBox .box select {display: inline-block;width: 120px;height: 40px; background-color: #fff;border:1px solid #e6e6e6;padding: 0 28px 0 10px;font-size: 16px;color: #969696;margin-right: 7px;}
+.searchBox .box select.w150 {width: 150px;}
+.searchBox .box input[type="text"] {display: inline-block;width: 120px;height: 40px;font-size: 16px;border:1px solid #e6e6e6;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.searchBox .box .datepicker_panel {width: 180px;height: 40px; position: relative;}
+.searchBox .box .datepicker_panel:before {content: "";display: block;position: absolute;left:10px;top: 11px;z-index: 1; width: 16px;height: 18px;background: url('../images/common/calendar.png') no-repeat;vertical-align: middle;}
+.searchBox .box .datepicker_panel:after {content: "";display: block;position: absolute;right:0;top: 16px; width: 26px;height: 8px;background: url('../images/common/btn_select.png') no-repeat;vertical-align: middle;}
+.searchBox .box .datepicker_panel input[type="text"]{width: 100%;padding:0 28px 0 35px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+/**/
+.myList table {width: 100%;}
+.myList table thead {background-color: #e6e6e6;}
+.myList table thead th {font-size: 16px;font-weight: bold;border-bottom: 2px solid #4e4e4e;height: 57px;}
+.myList table tbody tr {border-bottom: 1px solid #e6e6e6;background-color: #fff;}
+.myList table tbody tr:last-child {border-top: 1px solid #4e4e4e;border-bottom: 1px solid #4e4e4e;}
+.myList table tbody tr:hover {background-color: #f0f0f0}
+.myList table tbody tr td {font-size: 14px;padding:12px 0;text-align: center;}
+.myList table tbody tr td button {/*display: block;*/display:inline-block;width: 20px;height: 20px;/*margin-left:15px;*/background: url('../images/common/bg_icon.png') no-repeat -160px -149px;}
+.myList table tbody tr td .markSet.mark4{background-position: -148px -6px;}
+.myList + .paging {margin-bottom:0;}
+/**/
+.myList.sendCase table tbody tr td:last-child {padding:12px 20px;}
+.myList.sendCase table tbody tr td:last-child input {font-size:14px;}
+/**/
+.mypage .myList.person {margin-bottom: 20px;}
+.mypage .myList.person table thead th {font-size: 14px;font-weight: bold;border-bottom: 2px solid #4e4e4e;height: 38px;}
+.mypage .myList.person table tbody tr td {/*height:98px;*/font-size: 16px;padding:36px 0;text-align: center;}
+.mypage .myList.person table tbody tr td i,
+.mypage .myList.person table tbody tr td button {display: inline-block; font-size: 16px;color: #fff;background: #4e4e4e;height: 28px;line-height: 28px;width:80px;border-radius: 14px;}
+.mypage .myList.person table tbody tr td button {margin:2px 0;border-radius:0;}
+.mypage .myList.person table tbody tr td i.red,
+.mypage .myList.person table tbody tr td button.red {background: #e24e4e;}
+.mypage .myList.person table tbody tr td i.redline,
+.mypage .myList.person table tbody tr td button.redline {border:1px solid #e24e4e;background: #fff;color: #e24e4e;}
+.mypage .myList.person table tbody tr td i.blackline,
+.mypage .myList.person table tbody tr td button.blackline {color:#4e4e4e;background:#fff;border:1px solid #4e4e4e;}
+.mypage .myList.person table tbody tr td button.viewDetail {width:25px;height:25px;text-indent:-9999px;overflow:hidden;background: url('../images/sub/btn_viewDetail.png') no-repeat;}
+.mypage .myList.person table tbody tr td em {margin-right: 10px;}
+.mypage .myList.person table tbody tr td p {width: 277px; overflow:hidden;text-overflow:ellipsis;white-space: nowrap;}
+.mypage .myList.person.rcList table tbody tr td {padding:18px 0;}
+.mypage .myList.person.rcList table tbody tr td p {width:auto;}
+/**/
+.mypage .carListHead {width: 100%;border-bottom: 2px solid #4e4e4e;background-color: #e6e6e6;}
+.mypage .carListHead span {display: inline-block;font-size: 14px;font-weight: bold;height: 38px;line-height: 38px;text-align: center;}
+.mypage .carListHead span:nth-child(1) {width:120px;}
+.mypage .carListHead span:nth-child(2) {width:162px;}
+.mypage .carListHead span:nth-child(3) {width:300px;}
+.mypage .carListHead span:nth-child(4) {width:85px;}
+.mypage .carListHead span:nth-child(5) {width:150px;}
+.mypage .carListHead span:nth-child(6) {width:100px;}
+.mypage .carListHead span:nth-child(7) {width:170px;}
+.mypage .carListHead span:nth-child(8) {width:85px;}
+/**/
+.mypage .myList.carList {/*margin-bottom: 20px;*/height: 300px;overflow-y: scroll;border-bottom: 1px solid #4e4e4e;}
+.mypage .myList.carList table tbody tr td {font-size: 16px;padding:16px 0;text-align: center;}
+.mypage .myList.carList table tbody tr td i {display: inline-block; font-size: 16px;color: #fff;background-color: #848484;height: 28px;line-height: 28px;width: 110px;border-radius: 14px;}
+.mypage .myList.carList table tbody tr td i.red {background-color: #e24e4e;}
+.mypage .myList.carList table tbody tr td i.black {background-color: #4e4e4e;}
+.mypage .myList.carList table tbody tr td p {width: 303px; overflow:hidden;text-overflow:ellipsis;white-space: nowrap;}
+.mypage .myList.carList table tbody tr:hover {background-color: #e24e4e;}
+.mypage .myList.carList table tbody tr:hover * {color: #fff;}
+.mypage .myList.carList table tbody tr:hover td i {background-color: #fff;color: #848484}
+.mypage .myList.carList table tbody tr:last-child {border-bottom: none}
+.mypage .myList.carList table tbody tr.on {background-color: #e24e4e;}
+.mypage .myList.carList table tbody tr.on * {color: #fff;}
+.mypage .myList.carList table tbody tr.on td i {background-color: #fff;color: #848484}
+/**/
+.myWrite {border-top: 1px solid #4e4e4e;}
+.myWrite .writeRow {display: table;width: 100%; border-bottom: 1px solid #e6e6e6;}
+.myWrite .writeRow.last { border-bottom: 1px solid #4e4e4e;}
+.myWrite .writeRow.noLine { border-bottom:none}
+.myWrite .writeRow strong {display: table-cell; width:159px;line-height:1;font-size: 16px;padding:22px 0 22px 20px;vertical-align: middle; background-color: #f8f8f8;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.myWrite .writeRow strong.fs14 {font-size: 14px;padding:22px 18px;}
+.myWrite .writeRow span {display: table-cell;width:343px; padding:10px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.myWrite .writeRow.type1 span {width: initial;}
+.myWrite .writeRow.type2 strong {width: 240px;}
+.myWrite .writeRow.type2 span {width: 744px;background-color: #f8f8f8;position: relative;padding-left: 150px;}
+.myWrite .writeRow.type2 span select {width: 130px;position: absolute;left:10px;top: 50%;margin-top: -20px;}
+.myWrite .writeRow.type2 span .text2 {line-height: 36px;font-size: 14px;color: #969696;}
+.myWrite .writeRow.type2 span .text3 {line-height: 1.5;font-size: 14px;color: #969696;}
+.myWrite .writeRow.type2 span .text3 b {color:#000}
+.myWrite .writeRow.type3 span {width: 111px;background-color: #f8f8f8;border-right: 1px solid #e6e6e6;}
+.myWrite .writeRow.type3 span:last-child {border-right: none;}
+.myWrite .writeRow.type4 {border-bottom: 1px solid #4e4e4e;}
+.myWrite .writeRow.type4 strong {width: 100%;background-color: #e6e6e6;position: relative;padding:22px 20px;}
+.myWrite .writeRow span input[type="text"]{height: 40px;font-size: 16px;color: #969696;vertical-align: middle;}
+.myWrite .writeRow span input[type="text"].w150 {width: 150px;}
+.myWrite .writeRow span input[type="text"].w340 {width: 342px;}
+.myWrite .writeRow span button {margin-left: 10px;font-size: 16px;height: 40px;line-height: 36px;padding:0 20px;border:1px solid #969696;}
+.myWrite .writeRow span select {display: inline-block; height: 40px;border:1px solid #e6e6e6;padding: 0 28px 0 10px;font-size: 16px;color: #969696;vertical-align: middle;background-color: #fff;}
+.myWrite .writeRow span select.w50p {width:48.5%;}
+.myWrite .writeRow span select.w50p:first-child {margin-right:5px;}
+.myWrite .writeRow span select.w50p:last-child {float:right}
+.myWrite .writeRow span .text {line-height: 36px;font-size: 16px;color: #969696;}
+.myWrite .writeRow strong .text {font-size: 16px;color: #969696;font-weight:400;}
+.myWrite .writeRow span.km {position: relative;}
+.myWrite .writeRow span.km input[type="text"] {padding-right: 40px;}
+.myWrite .writeRow span.km i {font-size: 16px;color: #4e4e4e;font-weight: bold;position: absolute;right:20px;top: 20px;}
+.myWrite .writeRow span.bsSelect {padding:10px 0 10px 10px;font-size:15px;}
+.myWrite .writeRow span.bsSelect input {margin-right:3px;}
+.myWrite .writeRow span.bsSelect label {padding-right:6px;}
+.myWrite .writeRow.explain span {padding-right:0;}
+.myWrite .writeRow.explain span textarea {height:234px;width:554px;}
+.myWrite .writeRow.explain .checkArea {display:inline-block;width:282px !important;height:234px;padding:10px 20px 17px 20px;margin:10px 0 10px -1px;border:1px solid #d8d8d8;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;} 
+.myWrite .writeRow span.price {position: relative;}
+.myWrite .writeRow span.price input[type="text"] {padding-right: 40px;}
+.myWrite .writeRow span.price i {font-size: 16px;color: #4e4e4e;font-weight: bold;position: absolute;right:20px;top: 17px;}
+.myWrite .writeRow .markCase1 label {display: inline-block;padding:0 0 0 0;width:110px;}
+.myWrite .writeRow .markCase1 label input {margin:-3px 5px 0 0;}
+.myWrite .writeRow .markCase2 label {display: inline-block;padding:0 0 10px 0;width:142px;}
+.myWrite .writeRow .markCase2 input {margin:-3px 5px 0 0;}
+.myWrite .writeRow .markCase2 input[type="text"] {height:30px;width:50px;}
+.myWrite .writeRow .markCase2 label.wAuto {width:auto;}
+.myWrite .writeRow .markCase2 div input[type="text"] {margin-left:12px;width:480px;}
+/**/
+.myWrite .checkArea {background-color: #f8f8f8;border-bottom: 1px solid #4e4e4e;padding:20px 20px 15px 20px;}
+.myWrite .checkArea.bgWhite {background:#fff;}
+.myWrite .checkArea p {font-size: 14px;color: #969696}
+.myWrite .checkArea label {float:left;width: 25%;font-size: 14px;line-height: 2.2;}
+.myWrite .checkArea label input[type="checkbox"]{margin:-2px 5px 0 0;vertical-align: middle;}
+.myWrite .checkArea:after{content:"";display:block;clear:both;}
+/**/
+.myWrite .allCheckBar {display:block;line-height:1;font-size: 16px;padding:22px 20px;vertical-align: middle; background-color: #f8f8f8;border-bottom: 1px solid #e6e6e6;position: relative;}
+.myWrite .allCheckBar label {position: absolute;right: 20px;top: 22px;}
+.myWrite .allCheckBar label input[type="checkbox"]{margin:-2px 5px 0 0;vertical-align: middle;}
+/**/
+.cardWrap {border: 1px solid #e6e6e6;background-color: #f8f8f8;padding:50px 0;}
+.cardWrap .cardArea {width: 595px; height: 340px;margin:0 auto; background-color: #fff;border-radius: 20px;overflow:hidden;border:1px solid #e24e4e;box-shadow:0 10px 20px rgba(0,0,0,0.2);-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.cardWrap .cardArea dt {background-color: #e24e4e;height: 98px;padding:34px 0 0 40px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.cardWrap .cardArea dt span {display: block; height: 30px; background: url('../images/sub/card_logo.png') no-repeat;background-size: 160px auto;}
+.cardWrap .cardArea dd {position: relative;padding-top: 63px;text-align: center;}
+.cardWrap .cardArea dd .profileImage {position:absolute;left:50%;top:-60px;margin-left:-62px;}
+.cardWrap .cardArea dd span {display: block;}
+.cardWrap .cardArea dd span.levelArea {font-size: 22px;} 
+.cardWrap .cardArea dd span.levelArea .levelBadge {margin-right: 10px;margin-top: -5px;}
+.cardWrap .cardArea dd span.text em {display: inline-block; font-size: 16px;color: #969696;} 
+.cardWrap .cardArea dd span.text em:after {content: "";display: inline-block;width: 1px;height: 10px;background-color: #969696;margin:0 10px;}
+.cardWrap .cardArea dd span.text em:last-child:after {display: none;}
+.cardWrap .cardArea dd span.num {font-size: 18px;margin:15px 0 13px;}
+.cardWrap .cardArea dd span.num:before {content: "";display: inline-block;margin:-2px 7px 0 0; width: 11px;height:16px;background: url('../images/common/bg_icon.png') no-repeat -116px -89px;vertical-align: middle;}
+.cardWrap .cardArea dd span.memo {font-size: 20px;color: #e24e4e;}
+.cardWrap .cardArea.modify input[type="text"] {text-align: center;}
+.cardWrap .cardArea.modify input[type="text"]:focus {border:1px solid #e24e4e;}
+.cardWrap .cardArea.modify dd span.memo input[type="text"]{width: 440px;}
+.cardWrap .btnSet {margin-top:40px;padding:0 195px;}
+.cardWrap .btnSet span {width: 50%;}
+.cardWrap .btnSet a {height: 80px;line-height: 80px;padding:0;}
+.cardWrap .btnSet a.redLine {background-color: #f8f8f8;}
+.mypage .levelArea {cursor:pointer; text-decoration: underline;}
+/**/
+.mypage .dataSet {width: 1213px; margin:0 auto;padding:120px 0; -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.mypage .dataSet h2 {padding:40px 0;font-size:34px;font-weight:normal;text-align: center;font-size: 34px;}
+.mypage .dataSet h2:before {content: "";display: block;margin:0 auto; width: 26px;height: 36px;background: url('../images/common/bg_icon.png') no-repeat -135px -196px;}
+.mypage .dataSet h2 em {display: block;font-size:18px;font-weight:normal;color:#969696;}
+.mypage .dataSet h3 {font-size:26px;font-weight:normal;margin-bottom: 36px;position: relative;}
+.mypage .dataSet h3.line:after {content: "";display: block;border-bottom: 1px solid #e6e6e6;margin-top: 10px;}
+.mypage .dataSet h3 button {display: block;position: absolute;right: 0;top: 9px;width: 130px;height: 38px;line-height: 34px;border:1px solid #848484;background-color: #fff; font-size: 14px;color: #848484;text-align: center;}
+.mypage .dataSet h4 {font-size:18px;font-weight:normal;margin-bottom: 20px;}
+.mypage .profileArea {border: 1px solid #e6e6e6;background-color: #f8f8f8;padding:30px 40px;position: relative; -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.mypage .profileArea span {display: inline-block; vertical-align: middle;}
+.mypage .profileArea .dealName {font-size: 19px;}
+.mypage .profileArea .dealName:after {content: "";display: inline-block;width: 1px;height: 20px;background-color: #848484;vertical-align: middle;margin:0 40px;}
+.mypage .profileArea .levelWrap {font-size: 16px;}
+.mypage .profileArea .levelWrap:after {content: "";display: inline-block;width: 1px;height: 20px;background-color: #848484;vertical-align: middle;margin:0 40px;}
+.mypage .profileArea .levelWrap i {margin-right: 10px;}
+.mypage .profileArea .dealPoint {font-size: 16px;color: #e24e4e;}
+.mypage .profileArea .btnModify {display: block;position: absolute;right:40px;top: 60px; text-align: center; font-size: 16px;color: #e24e4e;width: 132px;height: 38px;line-height: 38px;border:1px solid #e24e4e;background-color: #fff;}
+/**/
+.mypage .btnSet {text-align: right}
+.mypage .btnSet span {display: inline-block;width: 147px;height: 38px;line-height: 38px;padding: 0 8px;}
+.mypage .btnSet span a {padding:0;font-size: 16px;}
+/**/
+.mycarAdd {float:right;display:inline-block;width:auto;}
+.mycarPart {padding:50px;background:#f8f8f8;}
+.mycarPart:after{content:"";display:block;clear:both;}
+.mycarPart h4 span {margin:0 10px;padding:0 10px;font-size:14px;color:#858585;border-left:1px solid #858585;display:inline-block;height:16px;line-height:14px;}
+.mycarPart .root {display: table;width: 100%; background-color: #fff;border: 1px solid #e6e6e6;height:315px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.mycarPart .root .noInfo {display: table-cell;vertical-align: middle;font-size:20px;font-weight:normal;text-align:center;}
+.mycarPart .root .noInfo em {display: block;font-size:14px;font-weight:normal;color:#969696;margin-top: 15px;}
+.mycarPart .root.rootNone {position:relative;float:left;width:50%;text-align:center;}
+.mycarPart .root.rootNone.first {border-right:0;}
+.mycarPart .root.rootNone .noInfo {display:inline-block;padding-top:45px;height:auto;vertical-align:top;}
+.mycarPart .root.rootNone .noInfo em {margin-top:5px;margin-bottom:20px;}
+.mycarPart .root.rootNone .btnSet.btnCenter {text-align:center}
+.mycarPart .root.rootNone .btnSet.btnCenter span a:before {content:"";display:inline-block;width:10px;height:23px;background:url('../images/common/btn_plus.png') no-repeat;padding-left:14px;vertical-align:middle;}
+.mycarPart .root .info1:before {content:"";display: block;margin:10px auto 15px; width:48px;height:37px;background:url('../images/common/estimate01.png') no-repeat;}
+.mycarPart .root .info2:before {content:"";display: block;margin:10px auto 15px; width:40px;height:40px;background:url('../images/common/estimate02.png') no-repeat;}
+.mycarPart .root .noInfo.rootIng1:before {content:"";display: block;margin:10px auto 15px; width:41px;height:58px;background:url('../images/common/bg_icon.png') no-repeat;background-position:-310px -174px;}
+.mycarPart .root .noInfo.rootIng2:before {content:"";display: block;margin:10px auto 15px; width:65px;height:58px;background:url('../images/common/estimate03.png') no-repeat;}
+.mycarPart .root.rootNone.noneCar .noInfo {color:#ccc;}
+.mycarPart .root.rootNone.noneCar .noInfo em {color:#ccc;}
+.mycarPart .root.rootNone.noneCar .info1:before {background-position:left bottom !important;}
+.mycarPart .root.rootNone.noneCar .info2:before {background-position:left bottom !important;}
+.mycarPart .root.rootNone.noneCar .btnSet.btnCenter span a {background:#d8d8d8;border-color:#d8d8d8;}
+.mycarPart .root.rootNone.noneCar .btnSet.btnCenter span a:before {background:url('../images/common/btn_plusoff.png') no-repeat;}
+/**/
+.mypage .dealerList {}
+.mypage .dealerList:after{content:"";display:block;clear:both;}
+.mypage .dealerList li {float:left;width: 50%;}
+.mypage .dealerList li .inner {margin:4px;padding:11px;padding-right: 60px;height:186px;border:1px solid #e6e6e6;position: relative;background-color: #fff;}
+.mypage .dealerList li .heartSet {position:absolute;top:40px;right:30px;}
+.mypage .dealerList li .dealerProfile {display: block; position: relative;padding:30px 20px 30px 140px;}
+.mypage .dealerList li .dealerProfile .favProfileImage {position:absolute;left:20px;top: 50%;margin-top: -50px;overflow:hidden;margin-right: 20px;}
+.mypage .dealerList li .dealerProfile .autoWidth {vertical-align:middle;min-height: 124px;}
+.mypage .dealerList li .dealerProfile .autoWidth .levelBadge {display: inline-block;margin-right: 10px;margin-top: -7px;vertical-align: middle;}
+.mypage .dealerList li .dealerProfile .autoWidth strong {font-size:20px;display: inline-block;margin-right: 20px;}
+.mypage .dealerList li .dealerProfile .autoWidth strong i {font-weight: normal;}
+.mypage .dealerList li .dealerProfile .autoWidth p {font-size:18px;color:#969696;margin-top: 10px;}
+.mypage .dealerList li .dealerProfile .autoWidth p strong {color: #4e4e4e;margin-right: 0px;}
+.mypage .dealerList li .dealerProfile .autoWidth p em {display: inline-block;}
+.mypage .dealerList li .dealerProfile .autoWidth p em:after {content: ""; display: inline-block; width: 1px;height: 8px;background-color: #848484;margin:0 16px;vertical-align: middle;}
+.mypage .dealerList li .dealerProfile .autoWidth p em:last-child:after {display: none;}
+/**/
+.mypage .listType1 {border-left:1px solid #e6e6e6;}
+.mypage .listType1 li {float:left;width:292px;border-top:1px solid #e6e6e6;margin-right:15px;}
+.mypage .listType1 li:nth-child(4){margin-right:0;}
+.mypage .listType1 li:last-child{margin-right: 0px;}
+.mypage .listType1 .thumBack {position:relative;overflow:hidden;}
+.mypage .listType1 .prBack .markGroup .goodsPrice {font-size: 24px;}
+/* .mypage .listType1 .heartSet {bottom:80px;} */
+/**/
+.mypage .qnaHead {width: 100%;border-bottom: 2px solid #4e4e4e;background-color: #e6e6e6;}
+.mypage .qnaHead span {display: inline-block;font-size: 14px;font-weight: bold;height: 38px;line-height: 38px;text-align: center;}
+.mypage .qnaHead span:nth-child(1) {width: 200px;}
+.mypage .qnaHead span:nth-child(2) {width: 586px;}
+.mypage .qnaHead span:nth-child(3) {width: 180px;}
+.mypage .qnaHead span:nth-child(4) {width: 230px;}
+/**/
+.mypage .qnaList {margin-bottom: 20px;}
+.mypage .qnaList dl dt {display: table;width: 100%;border-bottom: 1px solid #e6e6e6;background:#fff;}
+.mypage .qnaList .accordionSet .accordionTitle:after {right:20px;}
+.mypage .qnaList dl dt span {display: table-cell; font-size: 16px;padding:36px 0;text-align: center;}
+.mypage .qnaList dl dt span:nth-child(1) {width: 200px;}
+.mypage .qnaList dl dt span:nth-child(2) {width: 586px;}
+.mypage .qnaList dl dt span:nth-child(3) {width: 200px;}
+.mypage .qnaList dl dt span:nth-child(4) {width: 249px;}
+.mypage .qnaList dl dt span i {display: inline-block; font-size: 16px;color: #fff;background-color: #4e4e4e;height: 28px;line-height: 28px;width: 110px;border-radius: 14px;}
+.mypage .qnaList dl dt span i.red {background-color: #e24e4e;}
+.mypage .qnaList dl dt span i.redline {border:1px solid #e24e4e;background-color: #fff;color: #e24e4e;}
+.mypage .qnaList dl dd {background:#fff;}
+.mypage .qnaList dl dd p {padding:30px 60px 40px 270px;border-bottom: 1px solid #e6e6e6;font-size:15px;}
+.mypage .qnaList dl dd p:last-child {background-color: #f8f8f8;}
+.mypage .qnaList dl dd p strong {/*display: block;*/font-size: 16px;margin-bottom: 10px;position: relative;}
+.mypage .qnaList dl dd p strong:before {content: "";display: block;position: absolute;left:-50px;top: 0; width: 30px;height: 30px;background: url('../images/common/bg_icon.png') no-repeat -164px -196px;}
+.mypage .qnaList dl dd p:last-child strong:before {background-position: -197px -196px;}
+.mypage .qnaList dl dd span {display:inline-block;width:100%;}
+/* 일반회원 - 구매비용계산기 */
+.mypage .carListHead.ccCase span:nth-child(1) {width:145px;}
+.mypage .carListHead.ccCase span:nth-child(2) {width:135px;}
+.mypage .carListHead.ccCase span:nth-child(3) {width:130px;}
+.mypage .carListHead.ccCase span:nth-child(4) {width:140px;}
+.mypage .carListHead.ccCase span:nth-child(5) {width:145px;}
+.mypage .carListHead.ccCase span:nth-child(6) {width:262px;}
+.mypage .carListHead.ccCase span:nth-child(7) {width:120px;}
+.mypage .carListHead.ccCase span:nth-child(8) {width:110px;}
+/* 일반회원 - 체크리스트 */
+.mypage .carListHead.checkListCase span:nth-child(1) {width:223px;}
+.mypage .carListHead.checkListCase span:nth-child(2) {width:215px;}
+.mypage .carListHead.checkListCase span:nth-child(3) {width:215px;}
+.mypage .carListHead.checkListCase span:nth-child(4) {width:210px;}
+.mypage .carListHead.checkListCase span:nth-child(5) {width:223px;}
+.mypage .carListHead.checkListCase span:nth-child(6) {width:110px;}
+/* 일반회원 - 관심딜러 */
+.mypage .carListHead.dealerCase span:nth-child(1) {width:200px;}
+.mypage .carListHead.dealerCase span:nth-child(2) {width:155px;}
+.mypage .carListHead.dealerCase span:nth-child(3) {width:200px;}
+.mypage .carListHead.dealerCase span:nth-child(4) {width:158px;}
+.mypage .carListHead.dealerCase span:nth-child(5) {width:190px;}
+.mypage .carListHead.dealerCase span:nth-child(6) {width:160px;}
+.mypage .carListHead.dealerCase span:nth-child(7) {width:80px;}
+/* 2017-06-13 mycar_dealer menu by hr-park */
+.myList tr td i.red, 
+.myList tr td button.red {display:inline-block;font-size: 14px;color: #fff;background:#e24e4e;height:22px;line-height:21px;width:auto;padding:0 10px;border-radius: 10px;}
+.myList tr td i.redLine, 
+.myList tr td button.redLine {display:inline-block;font-size: 14px;color: #e24e4e;background:#fff;border:1px solid #e24e4e;height:20px;line-height:19px;width:auto;padding:0 10px;border-radius: 10px;}
+.myList tr td i.blackLine,
+.myList tr td button.blackLine{display:inline-block;font-size: 14px;color:#4e4e4e;background:#fff;border:1px solid #4e4e4e;height:20px;line-height:19px;width:auto;padding:0 10px;border-radius: 10px;}
+.myList tr td i.black,
+.myList tr td button.black {display:inline-block;font-size: 14px;color:#fff;background:#4e4e4e;border:1px solid #4e4e4e;height:20px;line-height:19px;width:auto;padding:0 10px;border-radius: 10px;}
+.myList tr td button {margin:2px 0;border-radius:0 !important;}
+.myList tr td .listView {display:inline-block;width:25px;height:25px;text-indent:-9999px;overflow:hidden;border:none;cursor:pointer;background: url('../images/sub/btn_viewDetail.png') no-repeat;}
+.myList.noMark table tbody tr td {padding:18px 0;}
+.myList table tbody tr td.noMark {padding:60px 0;}
+.container .searchBox .box button.btnSearch.btnL {right:110px;}
+.container .searchBox.visitSearch .box .datepicker_panel {width:178px}
+.container .searchBox.visitSearch .box strong.vehicle {margin-left:50px}
+.container .btnTab button.btnL {right:160px;}
+.container .tagTxtBox.tagTableBox {border:1px solid #e5e5e5;}
+.container .tagTxtBox.tagTableBox h3 {background-color:#e6e6e6;padding:20px;}
+.container .tagTxtBox {font-size:17px;margin-bottom:40px;}
+.container .tagTxtBox h3 {font-size:17px;padding:10px;}
+.container .tagTxtBox dl {position:relative;padding:40px;padding-left:250px;border-bottom:1px solid #e5e5e5;}
+.container .tagTxtBox dl dt {font-size:22px;}
+.container .tagTxtBox dl dd em {display:inline-block;width:85px;font-weight:bold;}
+.container .tagTxtBox dl dd:nth-child(2) {position:absolute;left:40px;top:35px;background-color:#f8f8f8;padding:30px;}
+.container .tagTxtBox dl dd:nth-child(3) {font-size:13px;color:#989898;margin:4px 0 23px;}
+.container .tagTxtBox dl dd:nth-child(5) {margin-top:10px;}
+.container .tagTxtBox dl dd:last-child {position:absolute;right:0;top:0;padding:53px 30px 40px;text-align:center;background-color:#f8f8f8;color:#969696;font-size:15px;}
+.container .tagTxtBox dl dd:last-child span {display:block;color:#4e4e4e;font-size:29px;}
+.container .tagTxtBox dl dd:last-child button {padding:10px 50px;margin-top:50px;color:#fff;font-size:17px;background-color:#e24e4e;}
+.container .tagTxtBox.mylist table {margin:10px 0;}
+.container .tagTxtBox.mylist table tbody tr td {padding:22px 0}
+.container .tagTxtBox .box input[type="text"] {display: inline-block;width: 120px;height: 40px;font-size: 16px;border:1px solid #e6e6e6;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.container .tagTxtBox .box .datepicker_panel {width: 176px;height: 40px; position: relative;}
+.container .tagTxtBox .box .datepicker_panel:before {content: "";display: block;position: absolute;left:10px;top: 11px;z-index: 1; width: 16px;height: 18px;background: url('../images/common/calendar.png') no-repeat;vertical-align: middle;}
+.container .tagTxtBox .box .datepicker_panel:after {content: "";display: block;position: absolute;right:0;top: 16px; width: 26px;height: 8px;background: url('../images/common/btn_select.png') no-repeat;vertical-align: middle;}
+.container .tagTxtBox .box .datepicker_panel input[type="text"]{width: 100%;padding:0 28px 0 35px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+/* // 2017-06-13 mycar_dealer menu by hr-park*/
+/* 2017-05-31 마이페이지 리스트 내용 없는 화면 추가 */
+.mypage .myList.person table tbody tr.dataNone td,
+.mypage .myList.carList table tbody tr.dataNone td,
+.qnaNone td {height:227px;font-size:19px !important}
+.dataNone em {font-size:15px;color:#979797;}
+/**/
+.mypage .myList.dataNoneList {height:260px!important;}
+.mypage .myList table tbody tr.dataNone:hover {background:#fff !important }
+.mypage .myList.carList table tbody tr.dataNone:hover {background:#fff !important;}
+.mypage .myList.carList table tbody tr.dataNone:hover td {color:#4e4e4e;}
+/**/
+.dealerList li {position:relative;}
+.dealerList .inner .noPro {width:120px;height:120px;margin-left:20px;padding:30px 0;}
+.listNone {background:#f8f8f8 !important;}
+/**/
+.mypage .myList.person.makeBox table tbody tr.dataNone:last-child {border-bottom:0 none}
+.mypage .myList.person.makeBox table tbody tr.dataNone td {height:365px;border-top:1px solid #4e4e4e;border-bottom:1px solid #4e4e4e;}
+.mypage .myList.person.rcList table tbody tr.dataNone td {height:60px}
+.mypage .myList.person.reList table tbody tr.dataNone td,
+.mypage .qnaNone {height:465px;}
+/**/
+.mypage .listType1.recCar {border-left:0;}
+.mypage .listType1.recCar li {padding-bottom:18px;margin-bottom:20px;border-left:1px solid #e6e6e6;}
+.mypage .listType1 .noInfo {width:292px !important;height:368px;border:1px solid #e6e6e6;}
+.mypage .listType1 .noInfo:before {display:inline-block;content:" "; width:74px; height:60px;background: url('../images/common/bg_color.png') no-repeat; margin:50% 111px}
+.mypage .listType1 .noInfo:last-child {margin-right:0}
+.mypage .listType1.recCar .saleCar .imgBack {width:290px;height:208px;}
+.mypage .listType1.recCar .saleCar .imgBack strong {width:290px;height:208px;}
+.mypage .listType1.recCar .saleCar .imgBack strong img {max-width:290px;width:100%;}
+/**/
+.mypage .qnaListNone {margin-bottom:0;}
+.mypage .qnaList {margin-bottom:20px;}
+.mypage .qnaArea {width:100%;margin-bottom:20px;}
+.mypage .qnaNone {border-top: 1px solid #4e4e4e;border-bottom: 1px solid #4e4e4e;}
+.mypage .qnaNone td {width:100%;font-size: 16px;padding: 36px 0;text-align: center;}
+/**/
+.checkListModify {width:750px;padding:30px;padding-bottom:50px;background-color: #fff;}
+.checkListDetail {width:750px;width:750px;padding:30px;padding-bottom:50px;background-color: #fff;}
+.ChecklistBox .txtBox {margin-bottom:20px;border:1px solid #e5e5e5;padding:20px;font-size:17px;height:440px;overflow-y:scroll;overflow-x:hidden;}
+.ChecklistBox .txtBox h3 {font-size:25px;color:#e04e4e;border-bottom:2px solid #e04e4e;padding-bottom:12px;}
+.ChecklistBox .txtBox h3:before {content:" ";display:inline-block;width: 30px;height: 30px;background: url('../images/common/checkTitleImg.png') no-repeat;vertical-align:middle;}
+.ChecklistBox .txtBox strong {display:block;vertical-align: middle;font-size: 19px;border-bottom:1px solid #e6e6e6;padding-bottom:5px;margin-top:30px;}
+.ChecklistBox .txtBox strong:before {content:" ";display:inline-block;width:16px;height:16px;background: url('../images/common/bg_icon.png') no-repeat -164px -132px;margin-right:8px}
+.ChecklistBox .txtBox strong span {font-size:14px;color:#848484;margin-left:9px;}
+.ChecklistBox .txtBox p {margin-left:30px;margin-top:20px;}
+.ChecklistBox .txtBox p input {margin-right:10px}
+.ChecklistBox .txtBox em {display:inline-block;margin-top:20px;color:#e64d4f;margin-left:30px;}
+.ChecklistBox .txtBox .btnSet {margin-top:70px;}
+.ChecklistBox .txtBox .btnSet span * {width:320px;height:80px;padding:20px 0 20px;font-size:27px;font-weight:400;}
+/**/
+.popCostSetting {width:900px;height:auto !important;padding:30px;padding-bottom:50px;background-color: #fff;}
+.popCostSetting .myWrite .writeRow strong {width:145px;padding:5px 20px;}
+.popCostSetting .myWrite .writeRow span {width:275px;}
+.popCostSetting .myWrite .writeRow.type1 span {width:695px;}
+.popCostSetting .btnAreaType {padding:20px 0 0;}
+.popCostSetting .costC2 .writeRow span {font-size:16px;line-height:1;}
+.popCostSetting .costC2 .btnAreaType span a {width:150px;vertical-align:top;margin:0 4px;} /* 2017-08-24 */
+/**/
+.popCostDetail {width:900px;height:auto !important;padding:30px;padding-bottom:50px;background-color: #fff;}
+.popCostDetail .myWrite .writeRow strong {width:145px;padding:5px 20px;}
+.popCostDetail .myWrite .writeRow span {width:275px;}
+.popCostDetail .myWrite .writeRow.type1 span {width:695px;}
+.popCostDetail .btnAreaType {padding:20px 0 0;}
+.popCostDetail .costC2 .writeRow span {font-size:16px;line-height:1;}
+.popCostDetail .costC2 .btnAreaType span button {width:150px;}
+/**/
+.popCostPerson {width:900px;height:auto !important;padding:30px;padding-bottom:50px;background-color: #fff;}
+.popCostPerson .myWrite .writeRow strong {width:145px;padding:5px 20px;}
+.popCostPerson .myWrite .writeRow span {width:275px;}
+.popCostPerson .myWrite .writeRow.type1 span {width:695px;}
+.popCostPerson .btnAreaType {padding:20px 0 0;}
+.popCostPerson .costC2 .writeRow span {font-size:16px;line-height:1;}
+.popCostPerson .costC2 .btnAreaType span button {width:150px;}
+/**/
+.popCarModfy {width:900px;height:auto !important;padding:30px;padding-bottom:50px;margin-bottom:50px !important;background-color: #fff;}
+.popCarModfy .myWrite .writeRow strong {font-size:14px;width:135px;}
+.popCarModfy .myWrite .writeRow span {width:276px;}
+.popCarModfy .myWrite .writeRow.type1 span {width:697px;}
+.popCarModfy .titBar {padding:0px 34px 0 30px !important;}
+.popCarModfy .myWrite .writeRow.explain span.vam {float:left;width:424px;}
+.popCarModfy .myWrite .writeRow.explain span.vam textarea {width:414px;height:230px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.popCarModfy .myWrite .writeRow.explain .checkArea {float:left;height:230px;padding:3px 10px 4px 10px !important;line-height:1.2;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.popCarModfy .btnAreaType {padding:20px 0 0;}
+/**/
+.visitCancel {width:440px;background-color: #fff;}
+.visitCancel em {color:#e24e4e;}
+/* 일반회원 - 명함관리 */
+.dealerCardList {clear:left;display:inline-block;width:100%;}
+.dealerCardList li {float:left;margin:0 0 20px;}
+.dealerCardList li.right {float:right;}
+.dealerCardList li:nth-child(2n+2) {float:right;}
+.dealerCardList .cardWrap {width:auto;padding:0;border:none;}
+.dealerCardList .cardArea {box-shadow:none;}
+.dealerCardList .cardWrap .logo {position:relative;}
+.dealerCardList .cardWrap .logo button {position:absolute;right:27px;top:27px;width:44px;height:44px;text-indent:-9999px;overflow:hidden;background: url('../images/sub/btn_dealer_Delete.png') no-repeat;}
+.dealerCardList li.noneLine {float:none;display:inline-block;width:100%;text-align:center;padding:250px 0;font-size:19px;color:#4e4e4e;border-top: 1px solid #4e4e4e;border-bottom: 1px solid #4e4e4e;background-color: #fff;}
+/**/
+.qnaManage .qnaArea {text-align:left;}
+.qnaManage dl {width:100%;line-height:1.4;}
+.qnaManage dl dt {position:relative;width:100%;padding:5px 0 0 50px;text-decoration:underline;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.qnaManage dl dt:before {content: "";display: block;position:absolute;left:0;top:0;width:30px;height:30px;background: url('../images/common/bg_icon.png') no-repeat -164px -196px;}
+.qnaManage dl dd {width:100%;margin:10px 0 0;padding:0 0 0 50px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:none}
+.qnaManage dl dd.answerArea {position:relative;margin:20px 0 0;padding:5px 0 20px 50px;}
+.qnaManage dl dd.answerArea:before {content: "";display: block;position:absolute;left:0;top:0;width:30px;height:30px;background: url('../images/common/bg_icon.png') no-repeat -197px -196px;}
+/**/
+.popQue.answerCase dl {width:100%;font-size:14px;padding:0 0 20px;line-height:1.4;}
+.popQue.answerCase dl dt {position:relative;width:100%;padding:5px 0 0 50px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.popQue.answerCase dl dt:before {content: "";display: block;position:absolute;left:0;top:0;width:30px;height:30px;background: url('../images/common/bg_icon.png') no-repeat -164px -196px;}
+.popQue.answerCase dl dd {width:100%;margin:10px 0 0;padding:0 0 0 50px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+/**/
+.markApply {display:table;width:100%;border:1px solid #e6e6e6;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.markApply div {display:table-cell;width:33.3%;text-align:center;}
+.markApply div strong {display:inline-block;width:100%;padding:16px 0;font-size:18px;font-weight:normal;border-right:1px solid #fff;background:#e6e6e6;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.markApply div.last strong {border-right:none;}
+.markApply div span {display:inline-block;width:100%;padding:0 0 30px;border-right:1px solid #e6e6e6;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.markApply div.last span {border-right:none;}
+.markApply div em {display:inline-block;width:270px;padding:290px 0 0;background: url('../images/sub/bg_markService.png') no-repeat;}
+.markApply div em button {width:263px;height:58px;color:#e24e4e;font-size:24px;border:1px solid #e24e4e;}
+.markApply div.second em {background-position:-270px top;}
+.markApply div.last em {background-position:-540px top;}
+/**/
+.popupAutoWrap.markServiceAdd {height:auto !important;width:670px;padding:30px;padding-bottom:50px;background-color: #fff;}
+.popupAutoWrap.markServiceAdd .carInfo {padding:17px 0 0 17px;margin-bottom:17px;background:#f8f8f8;}
+.popupAutoWrap.markServiceAdd h3 {font-size:16px;color: #4e4e4e;margin-bottom: 6px;}
+.popupAutoWrap.markServiceAdd .carInfo ul {padding-bottom: 17px;}
+.popupAutoWrap.markServiceAdd .carInfo ul li {font-size:16px;color: #4e4e4e;line-height: 2;}
+.popupAutoWrap.markServiceAdd .carInfo ul li strong {display: inline-block; width:85px;font-weight:normal;color: #858585;}
+.popupAutoWrap.markServiceAdd .carInfo ul.txtListType1 li {float:left;width:50%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.popupAutoWrap.markServiceAdd .carInfo ul:after{content:"";display:block;clear:both;}
+.popupAutoWrap.markServiceAdd .backLine {padding:20px 0 10px 20px;font-size:16px; border:1px solid #d8d8d8;}
+.popupAutoWrap.markServiceAdd .backLine span {display: inline-block;padding:0 0 10px 0;width:142px;}
+.popupAutoWrap.markServiceAdd .backLine input {margin:-3px 5px 0 0;}
+.popupAutoWrap.markServiceAdd .backLine input[type="text"] {height:30px;}
+.popupAutoWrap.markServiceAdd .backLine span.wAuto {width:auto;}
+.popupAutoWrap.markServiceAdd .backLine span.wAuto input[type="text"] {width:50px;}
+.popupAutoWrap.markServiceAdd .backLine div input[type="text"] {margin-left:12px;width:480px;}
+.popupAutoWrap.markServiceAdd .selectLine {padding:5px 5px 5px 5px;width:300px;font-size:16px;border:1px solid #d8d8d8;;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.popupAutoWrap.markServiceAdd .selectLine select {padding-left:20px;}
+/**/
+.popmarkServiceDetail {z-index:3001;width:900px;height:auto !important;padding:30px;padding-bottom:50px;background-color: #fff;}
+.popmarkServiceDetail .myWrite .writeRow strong {width:145px;}
+.popmarkServiceDetail .myWrite .writeRow span {width:275px;}
+.popmarkServiceDetail .myWrite .writeRow.type1 span {width:695px;}
+.popmarkServiceDetail .myWrite .writeRow.type1 span span {display:inline-block;width:auto;padding:0;}
+.popmarkServiceDetail .btnAreaType {padding:20px 0 0;}
+.popmarkServiceDetail .costC2 .writeRow span {font-size:16px;line-height:2.5;}
+.popmarkServiceDetail .costC2 .btnAreaType span button {width:150px;}
+/**/
+.popDealerView {margin:0 0 0 -494px !important;width:988px;height:auto !important;padding:30px;padding-bottom:50px;margin-bottom:50px !important;background-color: #fff;}
+.popDealerView h2 {padding:60px 0 18px;font-size:20px;}
+.popDealerView .first {padding:20px 0 30px;text-align:center;border-bottom:1px solid #e6e6e6}
+.popDealerView .first h2 {display:none;}
+.popDealerView .first .dealerProfile {margin:0 auto;}
+.popDealerView .first .dealerProfile .autoWidth {font-size:20px;}
+.popDealerView .first .dealerProfile .autoWidth p {font-size:16px;color:#e24e4e;}
+.popDealerView .second .back {position:relative;padding:10px 18px;height:200px;border:1px solid #e6e6e6}
+.popDealerView .second .back div.dMap {position:absolute;right:18px;top:18px;width:240px;height:180px;background:#eee;border:1px solid #e6e6e6}
+.popDealerView .second .back ul {font-size:18px;}
+.popDealerView .second .back ul li {display:table;width:100%;margin:10px 0;}
+.popDealerView .second .back ul li strong {display:table-cell;width:120px;}
+.popDealerView .second .back ul li span {display:table-cell;}
+.popDealerView .third .rateit .rateit-range {width:180px !important;height:30px !important;}
+.popDealerView .third .rateit .rateit-selected {height:30px !important;}
+.popDealerView .listType1.recCar {border-left:0;}
+.popDealerView .listType1.recCar li {padding-bottom:20px;margin-bottom:20px;border-left:1px solid #e6e6e6;}
+.popDealerView .listType1 {border-left:1px solid #e6e6e6;}
+.popDealerView .listType1 li {float: left;width: 296px;border-top:1px solid #e6e6e6;margin-right: 17px;}
+.popDealerView .listType1 li:nth-child(3){margin-right:0;}
+.popDealerView .listType1 li:last-child{margin-right: 0px;}
+.popDealerView .listType1 .saleCar .imgBack strong {height:210px;}
+.popDealerView .listType1 .thumBack {position:relative;overflow:hidden;}
+.popDealerView .listType1 .prBack .markGroup .goodsPrice {font-size: 24px;}
+.popDealerView .paging {margin:10px 0 0;}

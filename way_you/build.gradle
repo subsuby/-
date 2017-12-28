@@ -1,4 +1,4 @@
-// Tomcat°ú Cargo¸¦ À§ÇÑ Repository ¼³Á¤
+// Tomcatê³¼ Cargoë¥¼ ìœ„í•œ Repository ì„¤ì •
 buildscript {
 	repositories {
 		mavenCentral()
@@ -10,10 +10,11 @@ buildscript {
 		//classpath 'org.gradle.api.plugins:gradle-cargo-plugin:1.4'
 	}
 }
+
 apply plugin: 'java'
-apply plugin: 'eclipse-wtp'
 apply plugin: 'war'
-// Local  °³¹ß È¯°æ¿¡ »ç¿ëÀ» À§ÇÑ Tomcat Plugin
+apply plugin: 'eclipse-wtp'
+// Local  ê°œë°œ í™˜ê²½ì— ì‚¬ìš©ì„ ìœ„í•œ Tomcat Plugin
 apply plugin: 'tomcat'
 
 
@@ -43,9 +44,9 @@ project.ext {
 }
 
 repositories {
-    // Source ÀúÀå¼Ò »ç¿ë
+    // Source ì €ì¥ì†Œ ì‚¬ìš©
     flatDir { dirs "libs" }
-	// Maven ±âº» ÀúÀå¼Ò »ç¿ë
+	// Maven ê¸°ë³¸ ì €ì¥ì†Œ ì‚¬ìš©
     mavenCentral()
 }
 
@@ -153,7 +154,7 @@ war {
 	archiveName = "$warFileName"
 }
 
-// tomcarRunÀ» ½ÇÇà½ÃÅ°±â À§ÇØ¼­ war¿¡ ´ëÇÑ dependency¸¦ ÁÖÀÔÇÕ´Ï´Ù.
+// tomcarRunì„ ì‹¤í–‰ì‹œí‚¤ê¸° ìœ„í•´ì„œ warì— ëŒ€í•œ dependencyë¥¼ ì£¼ì…í•©ë‹ˆë‹¤.
 tomcatRun {
     contextPath = ""
     URIEncoding = 'UTF-8'

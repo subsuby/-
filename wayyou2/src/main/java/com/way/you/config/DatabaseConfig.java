@@ -26,7 +26,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableTransactionManagement
-@MapperScan(basePackages = "com.way.you.entity", annotationClass = Mapper.class)
+@MapperScan(basePackages = "com.way.you", annotationClass = Mapper.class)
 public class DatabaseConfig implements InitializingBean {
 
     @Autowired

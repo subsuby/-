@@ -34,7 +34,7 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(value="com.way.you.controllers")
+@ComponentScan(value="com.way.you")
 public class WebConfig extends WebMvcConfigurerAdapter{
 	@Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {

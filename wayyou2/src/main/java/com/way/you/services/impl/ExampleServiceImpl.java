@@ -9,13 +9,13 @@ import com.way.you.services.ExampleService;
 @Service("ExampleService")
 public class ExampleServiceImpl implements ExampleService {
 	
-//	@Autowired ExampleMapper exampleMapper;
+	@Autowired ExampleMapper exampleMapper;
 	
 	@Override
 	public String curDate() {
-		System.out.println("12312313");
-//		String date = exampleMapper.curDate();
-//		return date;
-		return "1234";
+//		System.out.println("12312313");
+		String date = exampleMapper.curDate();
+		return date;
+//		return "1234";
 	}
 }

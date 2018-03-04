@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.way.you.entity.LoginMapper">
+
+	<!-- 회원가입하기 -->
+	<insert id="signUp" parameterType="com.way.you.bean.User">
+		insert into 
+			TBL_USER (
+					USER_ID
+					, USER_PWD
+					, USER_NAME
+					, USER_BIRTH
+					, USER_PHONE
+					, USER_CONFIRM_CODE
+					) 
+			values (
+					#{userId}
+					, #{userPwd}
+					, #{userName}
+					, #{userBirth}
+					, #{userPhone}
+					, #{userConfirmCode}
+					); 
+	</insert>
+	
+	<!-- 로그인하기 -->
+	<select id="login" parameterType="com.way.you.bean.User" resultType="int">
+	SELECT
+		COUNT(*)
+	FROM
+		TBL_USER
+	WHERE
+		USER_ID = #{userId}
+		AND USER_PWD = #{userPwd}
+		AND USER_CONFIRM_YN = 'Y'
+		AND USER_CONFIRM_CODE IS NULL
+		AND USER_USE_YN = 'Y'
+	</select>
+	
+	<!-- 회원인증코드로 회원찾기 -->
+	<select id="selectByUserConfirmCode" parameterType="com.way.you.bean.User" resultType="com.way.you.bean.User">
+	SELECT
+		USER_ID
+		, USER_NAME
+		, USER_CONFIRM_CODE
+	FROM
+		TBL_USER
+	WHERE
+		USER_CONFIRM_CODE = #{userConfirmCode}
+	</select>
+	
+	<!-- 회원인증하기 -->
+	<update id="userConfirm" parameterType="com.way.you.bean.User">
+	UPDATE
+		TBL_USER
+	SET 
+		USER_CONFIRM_YN = 'Y'
+		, USER_CONFIRM_CODE = NULL
+	WHERE 
+		USER_CONFIRM_CODE = #{userConfirmCode}
+	</update>
+	
+	<!-- 회원인증하기 -->
+	<update id="setToken" parameterType="com.way.you.bean.User">
+	UPDATE
+		TBL_USER
+	SET 
+		USER_TOKEN = #{userToken}
+	WHERE 
+		USER_ID = #{userId}
+	</update>
+	
+	<!-- 회원아이디 찾기 -->
+	<select id="findUserId" parameterType="com.way.you.bean.User" resultType="com.way.you.bean.User">
+	SELECT
+		USER_ID
+	FROM
+		TBL_USER
+	WHERE
+		USER_NAME = #{userName}
+		AND USER_BIRTH = #{userBirth}
+		AND USER_PHONE = #{userPhone}
+	</select>
+	
+	<!-- 회원 비밀번호 찾기 -->
+	<update id="updatePwdFindCode" parameterType="com.way.you.bean.User">
+	UPDATE
+		TBL_USER
+	SET 
+		PWD_FIND_CODE = #{pwdFindCode}
+	WHERE 
+		USER_ID = #{userId}
+		AND USER_NAME = #{userName}
+		AND USER_BIRTH = #{userBirth}
+		AND USER_PHONE = #{userPhone}
+	</update>
+	
+	<!-- 회원 비밀번호 변경 인증-->
+	<update id="pwdFindCode" parameterType="com.way.you.bean.User">
+	UPDATE
+		TBL_USER
+	SET 
+		PWD_FIND_CODE = NULL
+	WHERE 
+		USER_ID = #{userId}
+		AND PWD_FIND_CODE = #{pwdFindCode}
+	</update>
+	
+	<!-- 회원 비밀번호 변경-->
+	<update id="resetPassword" parameterType="com.way.you.bean.User">
+	UPDATE
+		TBL_USER
+	SET 
+		USER_PWD = #{userPwd}
+	WHERE 
+		USER_ID = #{userId}
+	</update>
+	
+	<!-- 회원 아이디 중복검사 -->
+	<select id="duplicate" parameterType="com.way.you.bean.User" resultType="int">
+	SELECT
+		COUNT(USER_ID)
+	FROM
+		TBL_USER
+	WHERE
+		USER_ID = #{userId}
+	</select>
+	
+	<!-- 회원 정보 가져오기-->
+	<select id="getMyInfo" parameterType="com.way.you.bean.User" resultType="com.way.you.bean.User">
+	SELECT
+		USER_ID
+		, USER_NAME
+		, USER_BIRTH
+		, USER_PHONE
+	FROM
+		TBL_USER
+	WHERE
+		USER_ID = #{userId}
+	</select>
+	
+	<!-- 회원정보변경 -->
+	<update id="changeMyInfo" parameterType="com.way.you.bean.User">
+	UPDATE
+		TBL_USER
+	SET 
+		USER_NAME = #{userName}
+		, USER_PHONE = #{userPhone}
+	WHERE 
+		USER_ID = #{userId}
+	</update>
+	
+	<!-- 대기중인 약속 갯수 -->
+	<select id="getnewInfo" parameterType="com.way.you.bean.User" resultType="int">
+	SELECT DISTINCT
+			COUNT(*)
+		FROM 
+			BRT.TBL_APPT A
+			LEFT JOIN BRT.TBL_USER B ON A.APPT_HOST_ID = B.USER_ID
+			LEFT JOIN (
+						SELECT
+							C.APPT_ID AS APPT_ID
+							, C.APPT_GUEST_ID AS APPT_GUEST_ID
+							, D.USER_NAME AS USER_NAME
+						FROM
+							BRT.TBL_APPT_GUEST C
+							LEFT JOIN BRT.TBL_USER D ON C.APPT_GUEST_ID = D.USER_ID
+						) E ON A.APPT_ID = E.APPT_ID
+		WHERE
+			A.APPT_CONDITION IN ('W')
+			AND (A.APPT_HOST_ID = #{userId} OR E.APPT_GUEST_ID = #{userId})
+	</select>
+</mapper>

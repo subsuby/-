@@ -1,6 +1,7 @@
 package com.way.you.config;
 
-import com.jolbox.bonecp.BoneCPDataSource;
+import javax.sql.DataSource;
+
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,8 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.sql.DataSource;
+import com.jolbox.bonecp.BoneCPConfig;
+import com.jolbox.bonecp.BoneCPDataSource;
 
 /**
  * Data Access Layer 설정 빈
@@ -29,32 +31,44 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = "com.way.you", annotationClass = Mapper.class)
 public class DatabaseConfig implements InitializingBean {
 
-    @Autowired
-    private Environment environment;
-
     /**
      * {@link javax.sql.DataSource}를 빈으로 등록한다.
      * {@link spring.examples.EnvironmentInitializer}에 의해 등록된 JDBC 설정정보를 사용한다.
      *
      * BoneCP는 오픈소스 JDBC Pool 라이브러리이다.
      * 같은 일을 하는 라이브러리로 Tomcat JDBC Pool(Apache DBCP), c3p0 등이 있다.
+     * @throws ClassNotFoundException 
      */
+//    private Properties properties() {
+//    	Properties properties = new Properties();
+//    	properties.setProperty("driver", "com.mysql.jdbc.Driver");
+//    	return properties;
+//    }
+    private BoneCPConfig config() {
+    	BoneCPConfig config = new BoneCPConfig();
+    	config.setUser("berightthere");
+    	config.setPassword("berightthere");
+    	config.setJdbcUrl("jdbc:mysql://brt.cx7yrv7lmrnp.ap-northeast-2.rds.amazonaws.com/BRT?useUnicode=true&characterEncoding=utf8");
+//    	config.setDriverProperties(properties());
+    	return config;
+    }
     @Bean(destroyMethod = "close")
     public DataSource dataSource() {
-        BoneCPDataSource dataSource = new BoneCPDataSource();
-        dataSource.setDriverClass(environment.getRequiredProperty("jdbc.driverClass"));
-        dataSource.setJdbcUrl(environment.getRequiredProperty("jdbc.url"));
-        dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
-        dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
+    	BoneCPDataSource dataSource = new BoneCPDataSource(config());
+        dataSource.setDriverClass("com.mysql.jdbc.Driver");
+//        dataSource.setJdbcUrl(environment.getRequiredProperty("jdbc.url"));
+//        dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
+//        dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
 
         return dataSource;
     }
 
     /**
      * 스프링이 트랜잭션을 관리할때 사용하는 트랜잭션매니저를 등록한다.
+     * @throws ClassNotFoundException 
      */
     @Bean
-    public PlatformTransactionManager transactionManager() {
+    public PlatformTransactionManager transactionManager(){
         return new DataSourceTransactionManager(dataSource());
     }
 

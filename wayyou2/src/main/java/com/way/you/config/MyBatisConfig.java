@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@MapperScan(basePackages = "spring.examples.module", annotationClass = Mapper.class)
+@MapperScan(basePackages = "com.way.you", annotationClass = Mapper.class)
 public class MyBatisConfig {
 
     /**
@@ -37,10 +37,8 @@ public class MyBatisConfig {
 
         // 마이바티스가 사용한 DataSource를 등록
         factoryBean.setDataSource(dataSource);
-
         // 마이바티스 설정파일 위치 설정
         factoryBean.setConfigLocation(applicationContext.getResource("classpath:META-INF/mybatis/configuration.xml"));
-
         // spring.examples.model 패키지 이하의 model 클래스 이름을 짧은 별칭으로 등록
 //        factoryBean.setTypeAliasesPackage("spring.examples.model");
 

@@ -5,13 +5,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<tiles:insertAttribute name="meta"></tiles:insertAttribute>
 <title>template</title>
 </head>
+<tiles:insertAttribute name="scripts"></tiles:insertAttribute>
+<tiles:insertAttribute name="common"></tiles:insertAttribute>
 <body>
 	<tiles:insertAttribute name="header"></tiles:insertAttribute>
-	<div id="container">
+	<div id="container" style="margin-top:66px;">
 		<tiles:insertAttribute name="body"></tiles:insertAttribute>
 	</div>
 	<tiles:insertAttribute name="footer"></tiles:insertAttribute>
 </body>
+<script>
+Ventcamp.init();
+</script>
 </html>

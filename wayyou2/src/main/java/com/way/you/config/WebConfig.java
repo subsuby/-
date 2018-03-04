@@ -7,6 +7,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.web.accept.ContentNegotiationManager;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -26,6 +28,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 
+
 /**
  * servlet-context.xml
  * @author 김정섭
@@ -36,9 +39,14 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
 @EnableWebMvc
 @ComponentScan(value="com.way.you")
 public class WebConfig extends WebMvcConfigurerAdapter{
+	
 	@Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-		registry.addResourceHandler(AppConstBean.RESOURCE_HANDLER).addResourceLocations(AppConstBean.RESOURCE_LOCATIONS);
+		registry
+//		.addResourceHandler(AppConstBean.RESOURCE_HANDLER)
+//		.addResourceLocations(AppConstBean.RESOURCE_LOCATIONS);
+		.addResourceHandler("/resources/**")
+		.addResourceLocations("/resources/");
     }
 	
 //	// Validator - BeanValidation
@@ -118,96 +126,41 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 //        }
 //    }
 	
-	/**
-	 * <pre>
-	 * 1. ���� : �ٱ��� ������ ���� messageSource
-	 * 2. ���� : 
-	 *    ��� ���
-	 *     JAVA
-	 *      @Autowired MessageSource;
-	 *      messageSource.getMessage("code", {"args"}, "defaultMessage", Locale);
-	 *     JSP (Taglib)
-	 *      <spring:message code="code" text="defaultMessage"/>
-	 * 3. Input : 
-	 * 4. Output : 
-	 * 5. ��������
-	 * ----------------------------------------------------------------
-	 * ������                 �ۼ���                                            ���泻��
-	 * ----------------------------------------------------------------
-	 * 2016. 4. 8.     ks-choi                                      �����ۼ�
-	 * ----------------------------------------------------------------
-	 * </pre>
-	 *
-	 * @return
-	 */
 	@Bean
 	public MessageSource messageSource() {
 
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 		messageSource.setBasenames(
-				"classpath:messages/message"
-				, "classpath:messages/validation");
-		// if true, the key of the message will be displayed if the key is not
-		// found, instead of throwing a NoSuchMessageException
+				"/resources/messages/message");
 		messageSource.setUseCodeAsDefaultMessage(true);
 		messageSource.setFallbackToSystemLocale(true);
 		messageSource.setDefaultEncoding("UTF-8");
-		// # -1 : never reload, 0 always reload
 		messageSource.setCacheSeconds(60);
 		return messageSource;
 	}
 	
-	/**
-	 * <pre>
-	 * 1. ���� : �ٱ��� ������ ���� ������
-	 * 2. ���� : 
-	 *     ���������� SessionLocaleResolver, AcceptHeaderLocaleResolver, CookieLocaleResolver, FixedLocaleResolver 4������ �ִ�.
-	 *     > SessionLocaleResolver
-	 *      ���� �������� Locale�� ����ϰ� LocaleChangeInterceptor�� �߰��� ����Ͽ� �Ķ���ͷ� ������ �� �ִ�.
-	 *      ���� ���� ������ RequestContextUtils.getLocale(httpRequest)�� Ȯ���� �� �ִ�.
-	 *     > AcceptHeaderLocaleResolver
-	 *      request�� �ش� ���� �� "accept-language" ���� ����Ѵ�.
-	 *     > CookieLocaleResolver
-	 *      ��Ű�� ����ϸ� setLocale()�� ��Ű�� ����, resolveLocale()�� ��Ű�� Locale�� �����´�.
-	 *      ���� ���� ��� defaultLocale�� ����ϰ�, defaultLocale�� ���� ��� �ش��� "Accept-Language"�� ����Ѵ�.
-	 *      Property : "cookieName, cookieDomain, cookiePath, cookieMaxAge, cookieSecure"
-	 *     > FixedLocaleResolver
-	 *      ��û�� ������� Ư�� Locale(defaultLocale)�� �����ϸ�, setLocale()�� �������� �ʴ´�.
-	 * 3. Input : 
-	 * 4. Output : 
-	 * 5. ��������
-	 * ----------------------------------------------------------------
-	 * ������                 �ۼ���                                            ���泻��
-	 * ----------------------------------------------------------------
-	 * 2016. 4. 8.     ks-choi                                      �����ۼ�
-	 * ----------------------------------------------------------------
-	 * </pre>
-	 *
-	 * @return
-	 */
 	@Bean
 	public LocaleResolver localeResolver() {
 		
-		// ���� Ÿ�� 1. ���� �������� Locale ���
-		//SessionLocaleResolver sessionlocaleresolver = new SessionLocaleResolver();
-		//sessionlocaleresolver.setDefaultLocale(StringUtils.parseLocaleString(AppConstBean.MESSAGE_SOURCE_DEFAULT_LOCALE));	// �⺻ ������
-		
-		// ���� Ÿ�� 2. request�� Header�� "accept-language" ���
-		//AcceptHeaderLocaleResolver acceptHeaderLocaleResolver = new AcceptHeaderLocaleResolver();
-		
-		// ���� Ÿ�� 3. ��Ű�� �����Ǿ��ִ� Locale ���
 		CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
-		
+//		cookieLocaleResolver.setCookieName("lang");
 		return cookieLocaleResolver;
 	}
 	@Bean
 	public LocaleChangeInterceptor localeChangeInterceptor() {
 		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-		// request�� �Ѿ���� language parameter�� �޾Ƽ� locale�� ���� �Ѵ�.
-		localeChangeInterceptor.setParamName(AppConstBean.MESSAGE_SOURCE_DEFAULT_LOCALE_PARAM_NAME);
+		localeChangeInterceptor.setParamName("lang");
 		return localeChangeInterceptor;
 	}
 	
+	/**
+	 * 인터셉터 추가
+	 */
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		// Interceptor를 추가 한다.
+		registry.addInterceptor(localeChangeInterceptor());
+	}
 	
 	
 //	/** 161212 jy-seo ���� �޽����� �����ʾ� �ӽ��ּ�ó��
@@ -249,4 +202,11 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 //		factoryBean.setShared(true);
 //		return factoryBean;
 //	}
+	/**
+	* {@link org.springframework.core.env.Environment}를 사용해 빈 주입 값을 치환
+	*/
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
 }

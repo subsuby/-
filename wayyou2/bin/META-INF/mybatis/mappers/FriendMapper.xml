@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.way.you.entity.FriendMapper">
+
+	<select id="getFriendList" parameterType="com.way.you.bean.User" resultType="com.way.you.bean.Friend">
+		SELECT 
+			A.*
+		FROM 
+			BRT.TBL_USER_FRIEND A
+			LEFT JOIN TBL_USER B ON A.USER_FRIEND_ID = B.USER_ID
+		WHERE 
+			A.USER_ID = #{userId}
+			<if test="searchKey != ''">
+				AND B.USER_NAME= #{searchKey}
+			</if>
+	</select>
+	
+	<select id="getFriendInfo" parameterType="com.way.you.bean.Friend" resultType="com.way.you.bean.User">
+		SELECT
+			USER_ID
+			, USER_NAME
+			, USER_BIRTH
+			, USER_PHONE
+		FROM
+			BRT.TBL_USER
+		WHERE
+			USER_ID = #{userFriendId}
+	</select>
+	<select id="getUserInfo" parameterType="com.way.you.bean.User" resultType="com.way.you.bean.User">
+		SELECT 
+			USER_ID
+			, USER_NAME
+			, USER_BIRTH
+			, USER_PHONE
+		FROM 
+			BRT.TBL_USER
+		WHERE 
+			USER_ID = #{userId};
+	</select>
+	
+	<select id="findFriendById" parameterType="com.way.you.bean.User" resultType="com.way.you.bean.User">
+		SELECT
+			USER_ID
+			, USER_NAME
+			, USER_BIRTH
+			, USER_PHONE
+		FROM
+			BRT.TBL_USER
+		WHERE
+			USER_ID = #{userId}
+	</select>
+	
+	<insert id="addFriend" parameterType="com.way.you.bean.Friend">
+		INSERT INTO
+			TBL_USER_FRIEND (
+					USER_ID
+					, USER_FRIEND_ID
+					) 
+			values (
+					#{userId}
+					, #{userFriendId}
+					); 
+	</insert>
+</mapper>

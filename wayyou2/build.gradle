@@ -115,10 +115,13 @@ dependencies {
 	// Validator
 	compile "org.hibernate:hibernate-validator:$hibernateValidatorVersion"
 	
+	// SMTP
+	compile("org.springframework.boot:spring-boot-starter-mail")
 	// ETC
 	compile 'joda-time:joda-time:2.7'
 	compile 'json-taglib:json-taglib:0.4.1'
 	compile 'com.google.code.gson:gson:2.3.1'                                                      // Name: GSON, URL: https://github.com/google/gson
+	compile 'com.fasterxml.jackson.core:jackson-core:2.7.3'
 	compile 'com.fasterxml.jackson.core:jackson-databind:2.7.3'
 	compile 'com.fasterxml.jackson.core:jackson-annotations:2.7.3'
 	compile 'commons-io:commons-io:2.4'                                              // Name: Apache Commons, URL: http://jakarta.apache.org/commons/io/

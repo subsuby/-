@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.way.you.entity.ApptMapper">
+
+	<select id="getList" parameterType="com.way.you.bean.Appt" resultType="com.way.you.bean.Appt">
+		SELECT DISTINCT
+			A.*
+		FROM 
+			BRT.TBL_APPT A
+			LEFT JOIN BRT.TBL_USER B ON A.APPT_HOST_ID = B.USER_ID
+			LEFT JOIN (
+						SELECT
+							C.APPT_ID AS APPT_ID
+							, C.APPT_GUEST_ID AS APPT_GUEST_ID
+							, D.USER_NAME AS USER_NAME
+						FROM
+							BRT.TBL_APPT_GUEST C
+							LEFT JOIN BRT.TBL_USER D ON C.APPT_GUEST_ID = D.USER_ID
+						<if test="searchKey != ''">
+							WHERE
+								D.USER_NAME = #{searchKey}
+						  </if>
+						) E ON A.APPT_ID = E.APPT_ID
+		WHERE
+			<if test='apptCondition == "progress"'>
+				A.APPT_CONDITION IN ('P','0')
+			</if>
+			<if test='apptCondition == "wait"'>
+				A.APPT_CONDITION IN ('W')
+			</if>
+			<if test='apptCondition == "canceled"'>
+				A.APPT_CONDITION IN ('E','C')
+			</if>
+			AND (A.APPT_HOST_ID = #{apptHostId} OR E.APPT_GUEST_ID = #{apptHostId})
+			<if test="searchKey != ''">
+				AND (A.APPT_PLACE = #{searchKey} OR A.APPT_PURPOSE = #{searchKey})
+			</if>
+			<if test="apptTime != ''">
+				AND DATE_FORMAT(APPT_TIME, '%Y-%m-%d %H:%i') = #{apptTime}
+			</if>
+	</select>
+	
+	<select id="getListGuest" parameterType="com.way.you.bean.Appt" resultType="com.way.you.bean.ApptGuest">
+	SELECT
+		*
+	FROM
+		BRT.TBL_APPT_GUEST
+	WHERE
+		APPT_ID = #{apptId};
+	</select>
+	
+	<select id="getHostInfo" parameterType="com.way.you.bean.Appt" resultType="com.way.you.bean.User">
+	SELECT
+		USER_NAME
+	FROM
+		BRT.TBL_USER
+	WHERE
+		USER_ID = #{apptHostId}
+	</select>
+	
+	<select id="getGuestInfo" parameterType="com.way.you.bean.ApptGuest" resultType="com.way.you.bean.User">
+	SELECT
+		USER_NAME
+		, USER_BIRTH
+		, USER_PHONE
+	FROM
+		BRT.TBL_USER
+	WHERE
+		USER_ID = #{apptGuestId}
+	</select>
+	
+	<select id="getCalendarInfo" parameterType="com.way.you.bean.Calendar" resultType="com.way.you.bean.Appt">
+	SELECT DISTINCT
+		A.*
+	FROM 
+		BRT.TBL_APPT A
+		LEFT JOIN BRT.TBL_USER B ON A.APPT_HOST_ID = B.USER_ID
+		LEFT JOIN (
+					SELECT
+						C.APPT_ID AS APPT_ID
+						, C.APPT_GUEST_ID AS APPT_GUEST_ID
+						, D.USER_NAME AS USER_NAME
+					FROM
+						BRT.TBL_APPT_GUEST C
+						LEFT JOIN BRT.TBL_USER D ON C.APPT_GUEST_ID = D.USER_ID
+					) E ON A.APPT_ID = E.APPT_ID
+	WHERE
+		(A.APPT_HOST_ID = #{userId} OR E.APPT_GUEST_ID = #{userId})
+		AND DATE_FORMAT(APPT_TIME, '%Y-%m-%d') = #{ymd};
+	</select>
+	
+	<select id="getMainInfo" parameterType="com.way.you.bean.Appt" resultType="com.way.you.bean.Appt">
+		SELECT DISTINCT
+					A.*
+		FROM 
+			BRT.TBL_APPT A
+			LEFT JOIN BRT.TBL_USER B ON A.APPT_HOST_ID = B.USER_ID
+			LEFT JOIN (
+						SELECT
+							C.APPT_ID AS APPT_ID
+							, C.APPT_GUEST_ID AS APPT_GUEST_ID
+							, D.USER_NAME AS USER_NAME
+						FROM
+							BRT.TBL_APPT_GUEST C
+							LEFT JOIN BRT.TBL_USER D ON C.APPT_GUEST_ID = D.USER_ID
+						WHERE
+							C.APPT_GUEST_CONDITION = 'A') E ON A.APPT_ID = E.APPT_ID
+		WHERE
+			A.APPT_CONDITION IN ('W','P','T')
+			AND (A.APPT_HOST_ID = #{apptHostId} OR E.APPT_GUEST_ID = #{apptHostId})
+			AND DATE_FORMAT(A.APPT_TIME, '%Y-%m-%d %H:%i') > DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i')
+		ORDER BY A.APPT_TIME DESC
+		LIMIT 1;
+	</select>
+	
+	<insert id="registAppt" parameterType="com.way.you.bean.Appt">
+		INSERT INTO 
+			TBL_APPT (
+					APPT_HOST_ID
+					, APPT_TIME
+					, APPT_PLACE
+					, APPT_GUEST
+					, APPT_PURPOSE
+					, APPT_LAT
+					, APPT_LNG
+					) 
+			VALUES (
+					#{apptHostId}
+					, DATE_FORMAT(#{apptTime}, '%Y-%m-%d %H:%i')
+					, #{apptPlace}
+					, #{apptGuest}
+					, #{apptPurpose}
+					, #{apptLat}
+					, #{apptLng}
+					); 
+	</insert>
+	
+	<select id="getLastApptId" parameterType="com.way.you.bean.Appt" resultType="String">
+		SELECT
+			APPT_ID
+		FROM
+			TBL_APPT
+		WHERE
+			APPT_HOST_ID = #{apptHostId}
+			AND APPT_TIME = DATE_FORMAT(#{apptTime}, '%Y-%m-%d %H:%i')
+			AND APPT_PLACE = #{apptPlace}
+			AND APPT_GUEST = #{apptGuest}
+			AND APPT_PURPOSE = #{apptPurpose}
+			AND APPT_LAT = #{apptLat}
+			AND APPT_LNG = #{apptLng}
+		LIMIT 1;
+	</select>
+	
+	<insert id="registApptGuest" parameterType="com.way.you.bean.ApptGuest">
+		INSERT INTO 
+			TBL_APPT_GUEST (
+					APPT_ID
+					, APPT_GUEST_ID
+					, APPT_GUEST_CONDITION
+					) 
+			VALUES (
+					#{apptId}
+					, #{apptGuestId}
+					, #{apptGuestCondition}
+					); 
+	</insert>
+	
+	<select id="getApptDetail" parameterType="com.way.you.bean.Appt" resultType="com.way.you.bean.Appt">
+		SELECT
+			*
+		FROM 
+			BRT.TBL_APPT 
+		WHERE
+			APPT_ID = #{apptId}
+	</select>
+	
+	<update id="modifiedAppt" parameterType="com.way.you.bean.Appt">
+		UPDATE
+			TBL_APPT
+		SET 
+			APPT_HOST_ID = #{apptHostId}
+			, APPT_TIME = DATE_FORMAT(#{apptTime}, '%Y-%m-%d %H:%i')
+			, APPT_PLACE = #{apptPlace}
+			, APPT_GUEST = #{apptGuest}
+			, APPT_PURPOSE = #{apptPurpose}
+			, APPT_LAT = #{apptLat}
+			, APPT_LNG = #{apptLng}
+		WHERE 
+			APPT_ID = #{apptId}
+	</update>
+	
+	<delete id="truncateGuest" parameterType="com.way.you.bean.Appt">
+		DELETE FROM
+			TBL_APPT_GUEST
+		WHERE APPT_ID = #{apptId};
+	</delete>
+	
+	<update id="attendAppt" parameterType="com.way.you.bean.ApptGuest">
+		UPDATE
+			TBL_APPT_GUEST
+		SET 
+			APPT_GUEST_CONDITION= #{apptGuestCondition}
+		WHERE 
+			APPT_ID = #{apptId}
+			AND APPT_GUEST_ID = #{apptGuestId}
+	</update>
+	
+	<select id="selectWaitCount" parameterType="com.way.you.bean.ApptGuest" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			TBL_APPT_GUEST
+		WHERE
+			APPT_ID = #{apptId}
+			AND APPT_GUEST_CONDITION = 'W'
+	</select>
+	
+	<update id="changeApptCondition" parameterType="com.way.you.bean.Appt">
+		UPDATE
+			TBL_APPT
+		SET 
+			APPT_CONDITION= #{apptCondition}
+		WHERE 
+			APPT_ID = #{apptId}
+	</update>
+	
+	<update id="cancelAppt" parameterType="com.way.you.bean.Appt">
+		UPDATE
+			TBL_APPT
+		SET 
+			APPT_CONDITION= 'C'
+		WHERE 
+			APPT_ID = #{apptId}
+	</update>
+</mapper>

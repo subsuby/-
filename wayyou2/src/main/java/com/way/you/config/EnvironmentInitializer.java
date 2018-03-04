@@ -24,10 +24,9 @@ public class EnvironmentInitializer implements ApplicationContextInitializer<Con
         try {
             ConfigurableEnvironment environment = context.getEnvironment();
             MutablePropertySources propertySources = environment.getPropertySources();
-
+            
             List<Resource> resources = new ArrayList<>();
             resources.add(new ClassPathResource("META-INF/config.xml"));
-
             PropertiesFactoryBean bean = new PropertiesFactoryBean();
             bean.setLocations(resources.toArray(new Resource[resources.size()]));
             bean.afterPropertiesSet();

@@ -49,9 +49,10 @@ public class AppConstBean {
 	 ************************************************************************** */
 	public static final String 	MESSAGE_SOURCE_DEFAULT_LOCALE = "ko";							// 메시지 소스 디폴트 인코딩
 	public static final String 	MESSAGE_SOURCE_DEFAULT_LOCALE_PARAM_NAME = "lang";				// 메시지 소스 변경 파라미터 키
-	public static final String 	RESOURCE_HANDLER = "/**";										// 리소스 URL 맵핑 Path
-	public static final String 	RESOURCE_LOCATIONS = "/WEB-INF/resources/";						// 리소스 물리적 Path
-	//public static final String 	RESOURCE_LOCATIONS = "classpath:/com/gmk/swork/web/**";					// 리소스 물리적 Path
+	public static final String 	RESOURCE_HANDLER = "/resources/**";								// 리소스 URL 맵핑 Path
+//	public static final String 	RESOURCE_LOCATIONS = "/WEB-INF/resources/";						// 리소스 물리적 Path
+	/** 리소스 물리적 Path */
+	public static final String 	RESOURCE_LOCATIONS = "/resources/";
 
 
 	public static final String 	VIEW_PREFIX = "/WEB-INF/views/";								// jsp Root Path
@@ -172,13 +173,14 @@ public class AppConstBean {
 	public static final String MAIL_SERVICE_HOST = "smtp.gmail.com";
 	public static final int MAIL_SERVICE_PORT = 587;
 	public static final String MAIL_SERVICE_ENCODING = "UTF-8";
-	public static final String MAIL_SERVICE_USERNAME = "jymailtest@gmail.com";	// test
-	public static final String MAIL_SERVICE_PASSWORD = "fFT48tYMLidd0ta+E0eIyg==";
+	public static final String MAIL_SERVICE_USERNAME = "officialbrtservice@gmail.com";
+	public static final String MAIL_SERVICE_PASSWORD = "brt123!@";
 
 	/* Gmail Properties */
 	public static final Properties MAIL_SERVICE_GMAIL_PROP = new Properties(){
 		private static final long serialVersionUID = 1L;
 		{
+			setProperty("mail.transport.protocol", "smtp");
 			setProperty("mail.smtp.auth", "true");
 			setProperty("mail.smtp.starttls.enable", "true");
 			setProperty("mail.smtp.ssl.trust", "smtp.gmail.com");
